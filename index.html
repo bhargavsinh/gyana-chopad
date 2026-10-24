@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="Gyāna Chopad — ભારતીય જ્ઞાન ચોપડ. Educational board game inspired by traditional Gyan Chaupar." />
   <meta name="theme-color" content="#5C2D91" />
-  <title>જ્ઞાન ચોપડ | Gyāna Chopad</title>
+  <title>જ્ઞાન ચોપડ | Gyāna Chopad V1.1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
@@ -40,7 +40,6 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="bg-ivory text-ink font-gujarati antialiased min-h-screen">
-  <!-- Start Screen -->
   <div id="screen-start" class="screen min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-parchment via-ivory to-parchment opacity-90"></div>
     <div class="relative z-10 max-w-md w-full text-center space-y-6">
@@ -68,7 +67,7 @@
           <button type="button" data-mode="classic" class="mode-btn active flex-1 py-2 rounded-lg border-2 border-deepgreen bg-deepgreen text-ivory text-sm font-semibold">ક્લાસિક</button>
           <button type="button" data-mode="reflection" class="mode-btn flex-1 py-2 rounded-lg border-2 border-deepgreen/40 text-deepgreen text-sm font-semibold">વિચારશીલ</button>
         </div>
-        <p id="mode-desc" class="text-xs text-ink/70 text-left">સર્પ-નિસરણી અને પાસા સાથે સીધી રમત.</p>
+        <p id="mode-desc" class="text-xs text-ink/70 text-left">સર્પ-નિસરણી અને પાસા સાથે સીધી રમત. સાપ = પાછળ, સીડી = આગળ.</p>
       </div>
       <div class="flex items-center gap-2 text-left">
         <input type="checkbox" id="exact-win" checked class="rounded border-maroon text-maroon focus:ring-maroon" />
@@ -79,7 +78,6 @@
     </div>
   </div>
 
-  <!-- Rules Modal -->
   <div id="modal-rules" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/50 p-4">
     <div class="bg-ivory max-w-lg w-full max-h-[85vh] overflow-y-auto rounded-xl border-2 border-antiquegold p-5 space-y-4">
       <div class="flex justify-between items-center">
@@ -89,16 +87,15 @@
       <div class="text-sm space-y-3 leading-relaxed">
         <p><strong>બોર્ડ:</strong> ૭૨ ખાનાં, સર્પેન્ટાઇન માર્ગ. ૬ તબક્કા — જીવનથી પરમ-લક્ષ્ય સુધી.</p>
         <p><strong>પાસો:</strong> ૧–૬. ટોકન આગળ વધે.</p>
-        <p><strong>નિસરણી (લેડર):</strong> સદ્ગુણ — ઉપર જાય.</p>
-        <p><strong>સર્પ:</strong> દોષ — પાછળ જાય.</p>
+        <p><strong>નિસરણી (સીડી):</strong> સદ્ગુણ — ઉપર જાય. બોર્ડ પર લીલી રેખા.</p>
+        <p><strong>સાપ:</strong> દોષ — પાછળ જાય. બોર્ડ પર મેરૂન વક્ર રેખા.</p>
         <p><strong>જીત:</strong> ૭૨ પર પહોંચો. ચોક્કસ પાસો જરૂરી હોય તો ઓવરશૂટ પર ટોકન નહીં વધે.</p>
-        <p><strong>વિચારશીલ મોડ:</strong> કેટલાક ખાનાં પર શૈક્ષણિક કાર્ડ દેખાશે. વાંચો, વિચારો, પછી આગળ વધો.</p>
-        <p class="text-xs text-ink/70">આ રમત શૈક્ષણિક છે. કર્મને માત્ર પુરસ્કાર-શિક્ષા તરીકે ઘટાડવામાં આવ્યું નથી. પુષ્ટિમાર્ગીય અથવા વૈષ્ણવ સિદ્ધાંતોનું ખોટું નિરૂપણ નથી.</p>
+        <p><strong>વિચારશીલ મોડ:</strong> ખાનાં પર શૈક્ષણિક કાર્ડ. વાંચો, વિચારો, પછી આગળ વધો.</p>
+        <p class="text-xs text-ink/70">આ રમત શૈક્ષણિક છે. કર્મને માત્ર પુરસ્કાર-શિક્ષા તરીકે ઘટાડવામાં આવ્યું નથી.</p>
       </div>
     </div>
   </div>
 
-  <!-- Game Screen -->
   <div id="screen-game" class="screen hidden min-h-screen flex flex-col">
     <header class="bg-maroon text-ivory px-3 py-2 flex items-center justify-between sticky top-0 z-20 shadow">
       <div>
@@ -132,19 +129,14 @@
             <div id="dice-display" class="w-14 h-14 rounded-lg border-2 border-maroon bg-ivory flex items-center justify-center text-2xl font-bold text-maroon">—</div>
           </div>
           <p id="move-message" class="text-xs text-ink/70 min-h-[1.25rem]"></p>
+          <p id="help-tip" class="help-tip"></p>
         </div>
 
         <div id="players-list" class="bg-white/70 border border-antiquegold/50 rounded-xl p-3 space-y-1"></div>
-
-        <div id="square-info" class="bg-white/70 border border-antiquegold/50 rounded-xl p-3 text-sm hidden">
-          <p class="font-semibold text-maroon" id="square-title"></p>
-          <p class="text-xs mt-1" id="square-desc"></p>
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- Card Modal -->
   <div id="modal-card" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-4">
     <div class="bg-ivory max-w-md w-full max-h-[90vh] overflow-y-auto rounded-xl border-2 border-antiquegold p-5 space-y-4">
       <div class="flex justify-between items-start">
@@ -166,10 +158,9 @@
     </div>
   </div>
 
-  <!-- Win Modal -->
   <div id="modal-win" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-4">
     <div class="bg-ivory max-w-sm w-full rounded-xl border-2 border-antiquegold p-6 text-center space-y-4">
-      <p class="text-3xl">🪔</p>
+      <p class="text-3xl celebrate-emoji">🪔</p>
       <h2 class="text-2xl font-bold text-maroon">વિજય!</h2>
       <p id="win-message" class="text-lg"></p>
       <p class="text-sm text-ink/70">પરમ-લક્ષ્ય સુધી પહોંચ્યા. આ શૈક્ષણિક યાત્રાનો અંત છે.</p>
