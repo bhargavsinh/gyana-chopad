@@ -1,5 +1,5 @@
 /**
- * Gyāna Chopad — UI rendering and interactions
+ * Gyāna Chopad V1.1 — UI with visible snakes/ladders + animations
  */
 
 import { buildPositionMap, getStageForSquare } from './data.js';
@@ -42,8 +42,8 @@ export class UI {
         this.selectedMode = btn.dataset.mode;
         const desc = document.getElementById('mode-desc');
         desc.textContent = this.selectedMode === 'classic'
-          ? 'સર્પ-નિસરણી અને પાસા સાથે સીધી રમત.'
-          : 'ખાનાં પર શૈક્ષણિક કાર્ડ અને વિચારના પ્રશ્નો.';
+          ? 'સર્પ-નિસરણી અને પાસા સાથે સીધી રમત. સાપ = પાછળ, સીડી = આગળ.'
+          : 'ખાનાં પર શૈક્ષણિક કાર્ડ અને વિચારના પ્રશ્નો દેખાશે.';
       });
     });
 
@@ -51,7 +51,7 @@ export class UI {
 
     document.getElementById('btn-start').addEventListener('click', () => this.startGame());
     document.getElementById('btn-rules').addEventListener('click', () => this.showRules());
-    document.getElementById('btn-game-rules').addEventListener('click', () => this.showRules());
+    document.getElementById('btn-game-rules')?.addEventListener('click', () => this.showRules());
     document.getElementById('btn-close-rules').addEventListener('click', () => this.hideRules());
     document.getElementById('modal-rules').addEventListener('click', (e) => {
       if (e.target.id === 'modal-rules') this.hideRules();
@@ -78,12 +78,14 @@ export class UI {
     const exactWin = document.getElementById('exact-win').checked;
     this.engine.setup(names, this.selectedMode, exactWin);
     this.renderBoard();
+    this.drawConnections();
     this.renderStageLegend();
     this.updateTurnPanel();
     this.updatePlayersList();
     this.placeTokens();
     document.getElementById('current-mode-label').textContent =
       this.selectedMode === 'classic' ? 'ક્લાસિક મોડ' : 'વિચારશીલ મોડ';
+    this.setMoveMessage('પાસો નાખો અને આગળ વધો. સાપ ↓ પાછળ, સીડી ↑ આગળ.');
     this.showScreen('game');
   }
 
@@ -102,6 +104,17 @@ export class UI {
     const m = document.getElementById('modal-rules');
     m.classList.add('hidden');
     m.classList.remove('flex');
+  }
+
+  squareCenter(square) {
+    const pos = this.posMap[square];
+    if (!pos) return null;
+    const cellW = 100 / this.board.cols;
+    const cellH = 100 / this.board.rows;
+    return {
+      x: pos.col * cellW + cellW / 2,
+      y: pos.row * cellH + cellH / 2
+    };
   }
 
   renderBoard() {
@@ -128,17 +141,84 @@ export class UI {
         if (ladderFrom.has(square)) cell.classList.add('has-ladder');
         if (snakeFrom.has(square)) cell.classList.add('has-snake');
         cell.innerHTML = `<span class="cell-number">${toGujaratiNum(square)}</span>`;
-        cell.title = `ખાનું ${square}`;
+        cell.title = this.cellTooltip(square);
         boardEl.appendChild(cell);
       }
     }
+  }
+
+  cellTooltip(square) {
+    const ladder = this.connections.ladders.find(l => l.from === square);
+    if (ladder) return `સીડી: ${ladder.virtueGu} → ${ladder.to}`;
+    const snake = this.connections.snakes.find(s => s.from === square);
+    if (snake) return `સાપ: ${snake.viceGu} → ${snake.to}`;
+    if (square === this.board.winSquare) return 'પરમ-લક્ષ્ય (જીત)';
+    return `ખાનું ${square}`;
+  }
+
+  drawConnections() {
+    const wrapper = document.getElementById('board-wrapper');
+    let svg = document.getElementById('connections-svg');
+    if (svg) svg.remove();
+
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('id', 'connections-svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    this.connections.ladders.forEach((l, i) => {
+      const a = this.squareCenter(l.from);
+      const b = this.squareCenter(l.to);
+      if (!a || !b) return;
+      const midX = (a.x + b.x) / 2 + (i % 2 === 0 ? 1.5 : -1.5);
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('class', 'ladder-path');
+      path.setAttribute('d', `M ${a.x} ${a.y} Q ${midX} ${(a.y + b.y) / 2} ${b.x} ${b.y}`);
+      svg.appendChild(path);
+      for (let t = 0.25; t < 1; t += 0.25) {
+        const x = a.x + (b.x - a.x) * t;
+        const y = a.y + (b.y - a.y) * t;
+        const rung = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        rung.setAttribute('class', 'ladder-rung');
+        rung.setAttribute('x1', x - 1.2);
+        rung.setAttribute('y1', y);
+        rung.setAttribute('x2', x + 1.2);
+        rung.setAttribute('y2', y);
+        svg.appendChild(rung);
+      }
+    });
+
+    this.connections.snakes.forEach((s, i) => {
+      const a = this.squareCenter(s.from);
+      const b = this.squareCenter(s.to);
+      if (!a || !b) return;
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const cx1 = a.x + dx * 0.3 + (i % 2 === 0 ? 4 : -4);
+      const cy1 = a.y + dy * 0.3;
+      const cx2 = a.x + dx * 0.7 + (i % 2 === 0 ? -3 : 3);
+      const cy2 = a.y + dy * 0.7;
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('class', 'snake-path');
+      path.setAttribute('d', `M ${a.x} ${a.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${b.x} ${b.y}`);
+      svg.appendChild(path);
+      const head = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      head.setAttribute('class', 'snake-head-dot');
+      head.setAttribute('cx', a.x);
+      head.setAttribute('cy', a.y);
+      head.setAttribute('r', 1.4);
+      svg.appendChild(head);
+    });
+
+    wrapper.appendChild(svg);
   }
 
   renderStageLegend() {
     const el = document.getElementById('stage-legend');
     el.innerHTML = this.board.stages.map(s =>
       `<span class="px-1.5 py-0.5 rounded" style="background:${s.color}22;color:${s.color}">${s.nameGu}</span>`
-    ).join('');
+    ).join('') +
+    `<span class="conn-legend ladder">↑ સીડી</span><span class="conn-legend snake">↓ સાપ</span>`;
   }
 
   placeTokens() {
@@ -150,18 +230,18 @@ export class UI {
       token.id = `token-${p.id}`;
       token.textContent = toGujaratiNum(p.id + 1);
       layer.appendChild(token);
-      this.moveTokenElement(p);
+      this.moveTokenElement(p, false);
     });
     this.highlightActiveToken();
   }
 
-  moveTokenElement(player) {
+  moveTokenElement(player, animate = true) {
     const token = document.getElementById(`token-${player.id}`);
     if (!token) return;
     const pos = player.position;
     if (pos === 0) {
-      token.style.left = `${4 + player.id * 6}%`;
-      token.style.top = '92%';
+      token.style.left = `${4 + player.id * 7}%`;
+      token.style.top = '91%';
       return;
     }
     const { row, col } = this.posMap[pos];
@@ -169,10 +249,15 @@ export class UI {
     const cellH = 100 / this.board.rows;
     const sameSquare = this.engine.players.filter(pl => pl.position === pos);
     const offsetIdx = sameSquare.findIndex(pl => pl.id === player.id);
-    const ox = (offsetIdx % 2) * 8 - 4;
-    const oy = Math.floor(offsetIdx / 2) * 8 - 4;
-    token.style.left = `${col * cellW + cellW / 2 - 4 + ox * 0.3}%`;
-    token.style.top = `${row * cellH + cellH / 2 - 4 + oy * 0.3}%`;
+    const ox = (offsetIdx % 2) * 10 - 5;
+    const oy = Math.floor(offsetIdx / 2) * 10 - 5;
+    token.style.left = `${col * cellW + cellW / 2 - 5 + ox * 0.25}%`;
+    token.style.top = `${row * cellH + cellH / 2 - 5 + oy * 0.25}%`;
+    if (animate) {
+      token.classList.remove('bounce');
+      void token.offsetWidth;
+      token.classList.add('bounce');
+    }
   }
 
   highlightActiveToken() {
@@ -184,13 +269,28 @@ export class UI {
     }
   }
 
+  highlightSquare(square, on = true) {
+    document.querySelectorAll('.cell').forEach(c => c.classList.remove('highlight-move'));
+    if (on && square) {
+      const cell = document.querySelector(`.cell[data-square="${square}"]`);
+      if (cell) cell.classList.add('highlight-move');
+    }
+  }
+
   updateTurnPanel() {
     const p = this.engine.currentPlayer;
     if (!p) return;
     document.getElementById('current-player-name').textContent = p.name;
     document.getElementById('current-player-pos').textContent =
       `સ્થાન: ${toGujaratiNum(p.position)}`;
-    document.getElementById('btn-dice').disabled = !this.engine.canRoll() || this.rolling;
+    const btn = document.getElementById('btn-dice');
+    btn.disabled = !this.engine.canRoll() || this.rolling;
+    const tip = document.getElementById('help-tip');
+    if (tip) {
+      tip.textContent = this.engine.canRoll()
+        ? `${p.name}, પાસો નાખો`
+        : 'રાહ જુઓ…';
+    }
   }
 
   updatePlayersList() {
@@ -199,10 +299,18 @@ export class UI {
       this.engine.players.map(p => {
         const active = p.id === this.engine.currentPlayer?.id ? 'font-bold text-maroon' : '';
         return `<div class="flex justify-between text-sm ${active}">
-          <span><span class="inline-block w-2.5 h-2.5 rounded-full mr-1" style="background:var(--token-${p.id+1})"></span>${p.name}</span>
+          <span><span class="inline-block w-2.5 h-2.5 rounded-full mr-1" style="background:var(--token-${p.id + 1})"></span>${p.name}</span>
           <span>${toGujaratiNum(p.position)}</span>
         </div>`;
       }).join('');
+  }
+
+  setMoveMessage(text) {
+    const el = document.getElementById('move-message');
+    el.textContent = text;
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
   }
 
   bindGameControls() {
@@ -229,47 +337,59 @@ export class UI {
     const btn = document.getElementById('btn-dice');
     btn.disabled = true;
     diceEl.classList.add('dice-rolling');
+    this.setMoveMessage('પાસો ફરી રહ્યો છે…');
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       diceEl.textContent = toGujaratiNum(Math.floor(Math.random() * 6) + 1);
-      await sleep(80);
+      await sleep(70);
     }
 
     const value = this.engine.rollDice();
     diceEl.classList.remove('dice-rolling');
     diceEl.textContent = toGujaratiNum(value);
+    diceEl.classList.remove('pop');
+    void diceEl.offsetWidth;
+    diceEl.classList.add('pop');
 
-    await sleep(300);
+    await sleep(280);
+    const movedPlayer = this.engine.currentPlayer;
+    const fromPos = movedPlayer.position;
     const result = this.engine.applyMove(value);
 
-    this.engine.players.forEach(p => this.moveTokenElement(p));
+    this.engine.players.forEach(p => this.moveTokenElement(p, p.id === movedPlayer.id));
     this.highlightActiveToken();
     this.updatePlayersList();
 
-    let msg = '';
     if (result?.blocked) {
-      msg = 'ચોક્કસ પાસો જરૂરી હતો.';
+      this.setMoveMessage(`પાસો ${toGujaratiNum(value)} — ચોક્કસ પાસો જરૂરી, આગળ નહીં વધ્યા.`);
+      this.highlightSquare(null);
     } else if (result?.connection) {
       const c = result.connection;
       if (c.type === 'ladder') {
-        msg = `નિસરણી! ${c.virtueGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`;
+        this.setMoveMessage(`સીડી! ${c.virtueGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`);
+        this.highlightSquare(c.to);
       } else {
-        msg = `સર્પ! ${c.viceGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`;
+        this.setMoveMessage(`સાપ! ${c.viceGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`);
+        this.highlightSquare(c.to);
       }
     } else if (result?.won) {
-      msg = 'વિજય!';
+      this.setMoveMessage('વિજય! પરમ-લક્ષ્ય પર પહોંચ્યા.');
     } else {
-      msg = `આગળ વધ્યા.`;
+      const landed = result?.finalPos ?? (fromPos + value);
+      this.setMoveMessage(`પાસો ${toGujaratiNum(value)} → ખાનું ${toGujaratiNum(landed)}`);
+      this.highlightSquare(landed);
     }
-    document.getElementById('move-message').textContent = msg;
 
     if (result?.won) {
+      await sleep(400);
       this.showWin(this.engine.winner);
     } else if (result?.needsCard) {
+      await sleep(350);
       this.showRandomCard(result.landedOn);
     } else {
       this.rolling = false;
       this.updateTurnPanel();
+      setTimeout(() => this.highlightSquare(null), 1200);
     }
   }
 
@@ -316,6 +436,7 @@ export class UI {
     this.updateTurnPanel();
     this.updatePlayersList();
     this.highlightActiveToken();
+    this.highlightSquare(null);
   }
 
   showWin(player) {
