@@ -1,0 +1,106 @@
+{
+  "version": "1.0",
+  "note": "Educational game content created for Gyāna Chopad V1.0. Cards are designed for reflection and ethical discussion. They are not presented as direct scriptural quotations.",
+  "cards": [
+    {
+      "id": "c01",
+      "category": "virtue",
+      "titleGu": "સત્ય",
+      "titleEn": "Truthfulness",
+      "explanationGu": "સત્ય એટલે વાણી, વિચાર અને કર્મમાં સાચું રહેવું. સત્યવાદી વ્યક્તિ વિશ્વાસપાત્ર બને છે અને આંતરિક શાંતિ અનુભવે છે.",
+      "scenarioGu": "તમારા મિત્રે કોઈ ભૂલ કરી છે. સત્ય કહેવાથી તેને દુઃખ થશે, પણ છુપાવવાથી પાછળથી વધુ નુકસાન થઈ શકે. તમે શું કરશો?",
+      "takeawayGu": "સત્ય કહેવું મુશ્કેલ હોઈ શકે, પણ લાંબા ગાળે તે સંબંધો અને આત્માને મજબૂત બનાવે છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c02",
+      "category": "virtue",
+      "titleGu": "દયા",
+      "titleEn": "Compassion",
+      "explanationGu": "દયા એટલે અન્યના દુઃખને સમજીને તેને ઘટાડવાની ઇચ્છા. તે કેવળ ભાવના નથી, કર્મમાં પણ પ્રગટ થાય છે.",
+      "scenarioGu": "રસ્તે એક વૃદ્ધ વ્યક્તિને મદદની જરૂર છે, પણ તમે ઉતાવળમાં છો. તમે કેવી રીતે નિર્ણય લો?",
+      "takeawayGu": "નાની મદદ પણ દયાનું પ્રાયોગિક સ્વરૂપ છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c03",
+      "category": "virtue",
+      "titleGu": "વિનય",
+      "titleEn": "Humility",
+      "explanationGu": "વિનય એટલે અહંકાર વગરની નમ્રતા. તે જ્ઞાન અને સંબંધોને ઊંડા બનાવે છે.",
+      "scenarioGu": "તમને કોઈ કાર્યમાં સફળતા મળી છે. અન્ય લોકો તમારી પ્રશંસા કરે છે. તમે કેવી રીતે પ્રતિક્રિયા આપશો?",
+      "takeawayGu": "સફળતાને વિનય સાથે સ્વીકારવી એ ટકાઉ વિકાસનો માર્ગ છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c11",
+      "category": "vice",
+      "titleGu": "ક્રોધ",
+      "titleEn": "Anger",
+      "explanationGu": "ક્રોધ મનને અંધ કરે છે અને નિર્ણયને વિકૃત કરે છે. તે સંબંધોને નુકસાન પહોંચાડે છે.",
+      "scenarioGu": "તમને અન્યાય થયો છે અને ક્રોધ ઉભરાઈ રહ્યો છે. તમે તરત બોલશો કે શાંત થઈને વિચારશો?",
+      "takeawayGu": "ક્રોધને ઓળખીને વિરામ લેવો એ બુદ્ધિમત્તા છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c12",
+      "category": "vice",
+      "titleGu": "લોભ",
+      "titleEn": "Greed",
+      "explanationGu": "લોભ એટલે અતિ-ઇચ્છા. તે સંતોષને ઘટાડે છે અને અન્યને નુકસાન પહોંચાડી શકે છે.",
+      "scenarioGu": "તમને વધુ મળવાની તક છે, પણ તે અન્યને નુકસાન કરી શકે. તમે શું પસંદ કરશો?",
+      "takeawayGu": "પર્યાપ્તતાની ભાવના લોભને નિયંત્રિત કરે છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c20",
+      "category": "karma",
+      "titleGu": "કર્મની સમજ",
+      "titleEn": "Understanding Karma",
+      "explanationGu": "કર્મ એટલે ક્રિયા અને તેના પરિણામ. ભારતીય પરંપરાઓમાં કર્મને માત્ર શિક્ષા-પુરસ્કાર તરીકે નહીં, પણ કારણ-કાર્યના સૂક્ષ્મ નિયમ તરીકે સમજવામાં આવે છે.",
+      "scenarioGu": "તમે કોઈ સારું કાર્ય કરો છો, પણ તરત પરિણામ નથી દેખાતું. તમે કેવી રીતે વિચારશો?",
+      "takeawayGu": "કર્મને સરળ પુરસ્કાર-શિક્ષા તરીકે ઘટાડવું નહીં. ક્રિયાની ગુણવત્તા અને ભાવ પર ધ્યાન આપો.",
+      "source": "Educational game content — general philosophical concept"
+    },
+    {
+      "id": "c24",
+      "category": "reflection",
+      "titleGu": "આત્મનિરીક્ષણ",
+      "titleEn": "Self-reflection",
+      "explanationGu": "આત્મનિરીક્ષણ એટલે પોતાના વિચારો, ભાવો અને કર્મોને નિષ્પક્ષ રીતે જોવું. તે વિકાસનો આધાર છે.",
+      "scenarioGu": "આજે તમે કોઈ એવું કાર્ય કર્યું છે જેના પર તમે પાછળથી પસ્તાવો છો. તેને કેવી રીતે સમજશો અને સુધારશો?",
+      "takeawayGu": "નિયમિત આત્મનિરીક્ષણ વિકાસને વેગ આપે છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c28",
+      "category": "ethics",
+      "titleGu": "જવાબદારી",
+      "titleEn": "Responsibility",
+      "explanationGu": "જવાબદારી એટલે પોતાના કર્મોના પરિણામને સ્વીકારવું અને અન્ય પર દોષ નાખ્યા વગર સુધારો કરવો.",
+      "scenarioGu": "કોઈ કાર્ય નિષ્ફળ ગયું છે. તમે કારણો શોધશો કે તરત અન્યને દોષ આપશો?",
+      "takeawayGu": "જવાબદારી લેવી એ વિકાસનો માર્ગ છે.",
+      "source": "Educational game content"
+    },
+    {
+      "id": "c34",
+      "category": "philosophy",
+      "titleGu": "શરણાગતિ",
+      "titleEn": "Surrender / Reliance",
+      "explanationGu": "શરણાગતિ એટલે પોતાની મર્યાદા સમજીને ઉચ્ચ શક્તિ અથવા યોગ્ય માર્ગ પર વિશ્વાસ રાખવો. તે અહંકારને નરમ પાડે છે.",
+      "scenarioGu": "તમે બધું નિયંત્રિત કરવાનો પ્રયત્ન કરો છો અને થાકી ગયા છો. તમે કેવી રીતે વિચારશો?",
+      "takeawayGu": "પ્રયત્ન કરો, પણ સર્વ નિયંત્રણની ભ્રાંતિ છોડો.",
+      "source": "Educational game content — general traditional concept"
+    },
+    {
+      "id": "c40",
+      "category": "reflection",
+      "titleGu": "અંતિમ લક્ષ્ય",
+      "titleEn": "Ultimate goal",
+      "explanationGu": "જીવનમાં ઘણા લક્ષ્યો હોય છે. કેટલાક તાત્કાલિક, કેટલાક ઊંડા. પોતાના ઊંડા લક્ષ્યને સમજવું મહત્વપૂર્ણ છે.",
+      "scenarioGu": "તમે શું મેળવવા માંગો છો? સફળતા, શાંતિ, સેવા, જ્ઞાન કે કંઈક અન્ય? તેને સ્પષ્ટ કરો.",
+      "takeawayGu": "લક્ષ્યની સ્પષ્ટતા માર્ગને સરળ બનાવે છે.",
+      "source": "Educational game content"
+    }
+  ]
+}
