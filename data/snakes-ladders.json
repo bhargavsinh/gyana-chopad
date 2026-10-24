@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "note": "Educational game design. Virtue and vice names illustrate traditional didactic intent of historical Gyan Chaupar boards. This is not a reconstruction of any single historical board or attribution of specific doctrines.",
+  "ladders": [
+    { "from": 4, "to": 14, "virtue": "Satya", "virtueGu": "સત્ય", "descGu": "સત્યવાદી વર્તન જીવનને ઊંચે લઈ જાય છે." },
+    { "from": 9, "to": 31, "virtue": "Dayā", "virtueGu": "દયા", "descGu": "કરુણા અને દયા માર્ગને સરળ બનાવે છે." },
+    { "from": 16, "to": 26, "virtue": "Vinay", "virtueGu": "વિનય", "descGu": "નમ્રતા અને વિનય આત્માને ઉન્નત કરે છે." },
+    { "from": 21, "to": 42, "virtue": "Dāna", "virtueGu": "દાન", "descGu": "દાન અને સેવા આત્માને ઉપર લઈ જાય છે." },
+    { "from": 28, "to": 48, "virtue": "Śama", "virtueGu": "શમ", "descGu": "મનનું નિયમન અને શાંતિ." },
+    { "from": 36, "to": 44, "virtue": "Viveka", "virtueGu": "વિવેક", "descGu": "વિવેકબુદ્ધિ યોગ્ય માર્ગ દર્શાવે છે." },
+    { "from": 45, "to": 54, "virtue": "Bhakti", "virtueGu": "ભક્તિ", "descGu": "ભક્તિ અને શરણાગતિનો માર્ગ." },
+    { "from": 51, "to": 67, "virtue": "Sevā", "virtueGu": "સેવા", "descGu": "નિઃસ્વાર્થ સેવા આત્માને ઊંચે લઈ જાય છે." },
+    { "from": 58, "to": 65, "virtue": "Śraddhā", "virtueGu": "શ્રદ્ધા", "descGu": "શ્રદ્ધા અને નિષ્ઠા." }
+  ],
+  "snakes": [
+    { "from": 18, "to": 6, "vice": "Krodha", "viceGu": "ક્રોધ", "descGu": "ક્રોધ આત્માને પાછળ ખેંચે છે." },
+    { "from": 25, "to": 11, "vice": "Lobha", "viceGu": "લોભ", "descGu": "લોભ અને અતિસ્વાર્થ." },
+    { "from": 33, "to": 19, "vice": "Ahaṃkāra", "viceGu": "અહંકાર", "descGu": "અહંકાર પતનનું કારણ બને છે." },
+    { "from": 39, "to": 22, "vice": "Asatya", "viceGu": "અસત્ય", "descGu": "અસત્ય અને છલકપટ." },
+    { "from": 47, "to": 29, "vice": "Moha", "viceGu": "મોહ", "descGu": "મોહ અને આસક્તિ." },
+    { "from": 53, "to": 34, "vice": "Īrṣyā", "viceGu": "ઈર્ષ્યા", "descGu": "ઈર્ષ્યા અને દ્વેષ." },
+    { "from": 62, "to": 41, "vice": "Mad", "viceGu": "મદ", "descGu": "મદ અને અતિ-અહં." },
+    { "from": 68, "to": 49, "vice": "Pramāda", "viceGu": "પ્રમાદ", "descGu": "પ્રમાદ અને અસાવધાની." },
+    { "from": 71, "to": 55, "vice": "Āsakti", "viceGu": "આસક્તિ", "descGu": "અંતિમ તબક્કે પણ આસક્તિ પાછળ ખેંચી શકે છે." }
+  ]
+}
