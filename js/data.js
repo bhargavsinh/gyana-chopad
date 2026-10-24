@@ -10,12 +10,18 @@ export async function loadJSON(path) {
 }
 
 export async function loadAllData() {
-  const [board, connections, cardsData] = await Promise.all([
+  const [board, connections] = await Promise.all([
     loadJSON('data/board.json'),
-    loadJSON('data/snakes-ladders.json'),
-    loadJSON('data/cards.json')
+    loadJSON('data/snakes-ladders.json')
   ]);
-  return { board, connections, cards: cardsData.cards || [] };
+  let cards = [];
+  try {
+    const cardsData = await loadJSON('data/cards.json');
+    cards = cardsData.cards || [];
+  } catch (e) {
+    console.warn('cards.json not found or failed; Reflection Mode will have no cards.', e.message);
+  }
+  return { board, connections, cards };
 }
 
 /** Build serpentine position map: square number -> {row, col} (0-indexed from top-left) */
