@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="Gyāna Chopad — ભારતીય જ્ઞાન ચોપડ. Educational board game inspired by traditional Gyan Chaupar." />
+  <meta name="description" content="Gyāna Chopad V1.3 — ભારતીય જ્ઞાન ચોપડ. Educational Gyan Chaupar board game." />
   <meta name="theme-color" content="#5C2D91" />
-  <title>જ્ઞાન ચોપડ | Gyāna Chopad V1.1</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>જ્ઞાન ચોપડ | Gyāna Chopad V1.3</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
@@ -21,13 +24,7 @@
             deepgreen: '#1F4D3A',
             antiquegold: '#B8860B',
             parchment: '#F5E6C8',
-            ink: '#2C1810',
-            stage1: '#8B5A2B',
-            stage2: '#C9A227',
-            stage3: '#2E7D32',
-            stage4: '#1E3A5F',
-            stage5: '#5C2D91',
-            stage6: '#8B6914'
+            ink: '#2C1810'
           },
           fontFamily: {
             gujarati: ['\"Noto Sans Gujarati\"', 'sans-serif'],
@@ -45,12 +42,12 @@
     <div class="relative z-10 max-w-md w-full text-center space-y-6">
       <div class="space-y-2">
         <h1 class="text-4xl md:text-5xl font-bold text-maroon tracking-wide">જ્ઞાન ચોપડ</h1>
-        <p class="text-lg text-saffron font-display italic">Gyāna Chopad</p>
+        <p class="text-lg text-saffron font-display italic">Gyāna Chopad V1.3</p>
         <p class="text-sm text-ink/80">ભારતીય જ્ઞાન અને કર્મનું શૈક્ષણિક ચોપડ</p>
       </div>
       <div class="bg-white/60 border border-antiquegold/40 rounded-xl p-5 shadow-sm text-left space-y-3">
-        <p class="text-sm leading-relaxed">પરંપરાગત જ્ઞાન ચોપડથી પ્રેરિત શૈક્ષણિક રમત. ૭૨ ખાનાં, સર્પ-નિસરણી, સદ્ગુણો અને દોષો, તથા વિચારશીલ પ્રશ્નો.</p>
-        <p class="text-xs text-ink/70">આ એક મૂળ શૈક્ષણિક રચના છે. કોઈ એક ઐતિહાસિક બોર્ડની પુનર્નિર્માણી નથી.</p>
+        <p class="text-sm leading-relaxed">પરંપરાગત જ્ઞાન ચોપડથી પ્રેરિત શૈક્ષણિક રમત. ૭૨ ખાનાં, સર્પ-નિસરણી, સદ્ગુણો અને દોષો.</p>
+        <p class="text-xs text-ink/70">મૂળ શૈક્ષણિક રચના — કોઈ એક ઐતિહાસિક બોર્ડની પુનર્નિર્માણી નથી.</p>
       </div>
       <div class="space-y-3">
         <label class="block text-sm font-medium text-left">ખેલાડીઓની સંખ્યા (૨–૪)</label>
@@ -75,6 +72,7 @@
       </div>
       <button id="btn-start" class="w-full py-3 rounded-xl bg-saffron hover:bg-saffron/90 text-white font-bold text-lg shadow-md transition">રમત શરૂ કરો</button>
       <button id="btn-rules" class="w-full py-2 text-sm text-maroon underline">નિયમો જુઓ</button>
+      <p class="text-xs"><a href="policies/index.html" class="text-maroon underline">Policy Center / નીતિ કેન્દ્ર</a></p>
     </div>
   </div>
 
@@ -85,13 +83,9 @@
         <button id="btn-close-rules" class="text-2xl text-ink/60 hover:text-ink">&times;</button>
       </div>
       <div class="text-sm space-y-3 leading-relaxed">
-        <p><strong>બોર્ડ:</strong> ૭૨ ખાનાં, સર્પેન્ટાઇન માર્ગ. ૬ તબક્કા — જીવનથી પરમ-લક્ષ્ય સુધી.</p>
-        <p><strong>પાસો:</strong> ૧–૬. ટોકન આગળ વધે.</p>
-        <p><strong>નિસરણી (સીડી):</strong> સદ્ગુણ — ઉપર જાય. બોર્ડ પર લીલી રેખા.</p>
-        <p><strong>સાપ:</strong> દોષ — પાછળ જાય. બોર્ડ પર મેરૂન વક્ર રેખા.</p>
-        <p><strong>જીત:</strong> ૭૨ પર પહોંચો. ચોક્કસ પાસો જરૂરી હોય તો ઓવરશૂટ પર ટોકન નહીં વધે.</p>
-        <p><strong>વિચારશીલ મોડ:</strong> ખાનાં પર શૈક્ષણિક કાર્ડ. વાંચો, વિચારો, પછી આગળ વધો.</p>
-        <p class="text-xs text-ink/70">આ રમત શૈક્ષણિક છે. કર્મને માત્ર પુરસ્કાર-શિક્ષા તરીકે ઘટાડવામાં આવ્યું નથી.</p>
+        <p><strong>બોર્ડ:</strong> ૭૨ ખાનાં, છ તબક્કા.</p>
+        <p><strong>સીડી:</strong> સદ્ગુણ — ઉપર. <strong>સાપ:</strong> દોષ — પાછળ.</p>
+        <p><strong>જીત:</strong> ૭૨ (ચોક્કસ પાસો વિકલ્પ).</p>
       </div>
     </div>
   </div>
@@ -107,7 +101,6 @@
         <button id="btn-restart" class="text-xs px-2 py-1 rounded border border-ivory/40 hover:bg-white/10">નવી રમત</button>
       </div>
     </header>
-
     <div class="flex-1 flex flex-col lg:flex-row gap-2 p-2 max-w-6xl mx-auto w-full">
       <div class="flex-1 flex flex-col items-center">
         <div id="board-wrapper" class="relative w-full max-w-[min(100vw-1rem,520px)] aspect-[8/9] bg-parchment border-2 border-antiquegold rounded-lg shadow-inner overflow-hidden">
@@ -116,22 +109,18 @@
         </div>
         <div id="stage-legend" class="mt-2 flex flex-wrap gap-1 justify-center text-[10px]"></div>
       </div>
-
       <div class="w-full lg:w-72 flex flex-col gap-3">
         <div id="turn-panel" class="bg-white/70 border border-antiquegold/50 rounded-xl p-3 space-y-2">
           <p class="text-xs text-ink/60">વર્તમાન ખેલાડી</p>
           <p id="current-player-name" class="text-lg font-bold text-maroon">—</p>
           <p id="current-player-pos" class="text-sm">સ્થાન: ૦</p>
           <div class="flex items-center gap-3">
-            <button id="btn-dice" class="flex-1 py-3 rounded-xl bg-saffron text-white font-bold text-lg shadow hover:bg-saffron/90 disabled:opacity-50 disabled:cursor-not-allowed transition">
-              પાસો નાખો
-            </button>
+            <button id="btn-dice" class="flex-1 py-3 rounded-xl bg-saffron text-white font-bold text-lg shadow hover:bg-saffron/90 disabled:opacity-50 disabled:cursor-not-allowed transition">પાસો નાખો</button>
             <div id="dice-display" class="w-14 h-14 rounded-lg border-2 border-maroon bg-ivory flex items-center justify-center text-2xl font-bold text-maroon">—</div>
           </div>
           <p id="move-message" class="text-xs text-ink/70 min-h-[1.25rem]"></p>
           <p id="help-tip" class="help-tip"></p>
         </div>
-
         <div id="players-list" class="bg-white/70 border border-antiquegold/50 rounded-xl p-3 space-y-1"></div>
       </div>
     </div>
@@ -163,7 +152,7 @@
       <p class="text-3xl celebrate-emoji">🪔</p>
       <h2 class="text-2xl font-bold text-maroon">વિજય!</h2>
       <p id="win-message" class="text-lg"></p>
-      <p class="text-sm text-ink/70">પરમ-લક્ષ્ય સુધી પહોંચ્યા. આ શૈક્ષણિક યાત્રાનો અંત છે.</p>
+      <p class="text-sm text-ink/70">પરમ-લક્ષ્ય સુધી પહોંચ્યા.</p>
       <button id="btn-new-game" class="w-full py-3 rounded-xl bg-saffron text-white font-bold">નવી રમત</button>
     </div>
   </div>
