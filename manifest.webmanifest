@@ -1,0 +1,13 @@
+{
+  "name": "જ્ઞાન ચોપડ | Gyāna Chopad",
+  "short_name": "જ્ઞાન ચોપડ",
+  "description": "Educational Indian Gyan Chaupar board game — virtues, ethics, reflection. V1.3",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F8F1E3",
+  "theme_color": "#6B2D3C",
+  "lang": "gu",
+  "dir": "ltr",
+  "orientation": "any",
+  "categories": ["education", "games"]
+}

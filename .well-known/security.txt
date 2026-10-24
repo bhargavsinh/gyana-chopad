@@ -1,0 +1,4 @@
+Contact: https://github.com/bhargavsinh/gyana-chopad/issues
+Preferred-Languages: en, gu
+Policy: https://bhargavsinh.github.io/gyana-chopad/policies/security.html
+Canonical: https://bhargavsinh.github.io/gyana-chopad/.well-known/security.txt
