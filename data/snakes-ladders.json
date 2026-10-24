@@ -1,26 +1,33 @@
 {
-  "version": "1.0",
-  "note": "Educational game design. Virtue and vice names illustrate traditional didactic intent of historical Gyan Chaupar boards. This is not a reconstruction of any single historical board or attribution of specific doctrines.",
+  "version": "1.3",
+  "note": "V1.3 logical layout: connections balanced across six stages; no overlapping heads; ladders advance within/near stage, snakes regress meaningfully; late-game risk retained. Educational design, not historical reconstruction.",
+  "designPrinciples": [
+    "One connection head per square",
+    "Ladders never land on snake heads",
+    "Snakes never land on ladder bottoms",
+    "Early game: short moves; mid: medium; late: high risk near 72",
+    "Each stage has at least one virtue climb or vice fall opportunity"
+  ],
   "ladders": [
-    { "from": 4, "to": 14, "virtue": "Satya", "virtueGu": "સત્ય", "descGu": "સત્યવાદી વર્તન જીવનને ઊંચે લઈ જાય છે." },
-    { "from": 9, "to": 31, "virtue": "Dayā", "virtueGu": "દયા", "descGu": "કરુણા અને દયા માર્ગને સરળ બનાવે છે." },
-    { "from": 16, "to": 26, "virtue": "Vinay", "virtueGu": "વિનય", "descGu": "નમ્રતા અને વિનય આત્માને ઉન્નત કરે છે." },
-    { "from": 21, "to": 42, "virtue": "Dāna", "virtueGu": "દાન", "descGu": "દાન અને સેવા આત્માને ઉપર લઈ જાય છે." },
-    { "from": 28, "to": 48, "virtue": "Śama", "virtueGu": "શમ", "descGu": "મનનું નિયમન અને શાંતિ." },
-    { "from": 36, "to": 44, "virtue": "Viveka", "virtueGu": "વિવેક", "descGu": "વિવેકબુદ્ધિ યોગ્ય માર્ગ દર્શાવે છે." },
-    { "from": 45, "to": 54, "virtue": "Bhakti", "virtueGu": "ભક્તિ", "descGu": "ભક્તિ અને શરણાગતિનો માર્ગ." },
-    { "from": 51, "to": 67, "virtue": "Sevā", "virtueGu": "સેવા", "descGu": "નિઃસ્વાર્થ સેવા આત્માને ઊંચે લઈ જાય છે." },
-    { "from": 58, "to": 65, "virtue": "Śraddhā", "virtueGu": "શ્રદ્ધા", "descGu": "શ્રદ્ધા અને નિષ્ઠા." }
+    { "from": 3, "to": 12, "virtue": "Satya", "virtueGu": "સત્ય", "descGu": "સત્યવાદી વર્તન જીવનને ઊંચે લઈ જાય છે.", "stage": 1 },
+    { "from": 8, "to": 17, "virtue": "Dayā", "virtueGu": "દયા", "descGu": "કરુણા અને દયા માર્ગને સરળ બનાવે છે.", "stage": 1 },
+    { "from": 15, "to": 27, "virtue": "Vinay", "virtueGu": "વિનય", "descGu": "નમ્રતા અને વિનય આત્માને ઉન્નત કરે છે.", "stage": 2 },
+    { "from": 22, "to": 35, "virtue": "Dāna", "virtueGu": "દાન", "descGu": "દાન અને સેવા આત્માને ઉપર લઈ જાય છે.", "stage": 2 },
+    { "from": 30, "to": 43, "virtue": "Śama", "virtueGu": "શમ", "descGu": "મનનું નિયમન અને શાંતિ.", "stage": 3 },
+    { "from": 38, "to": 50, "virtue": "Viveka", "virtueGu": "વિવેક", "descGu": "વિવેકબુદ્ધિ યોગ્ય માર્ગ દર્શાવે છે.", "stage": 4 },
+    { "from": 46, "to": 56, "virtue": "Bhakti", "virtueGu": "ભક્તિ", "descGu": "ભક્તિ અને શરણાગતિનો માર્ગ.", "stage": 4 },
+    { "from": 52, "to": 64, "virtue": "Sevā", "virtueGu": "સેવા", "descGu": "નિઃસ્વાર્થ સેવા આત્માને ઊંચે લઈ જાય છે.", "stage": 5 },
+    { "from": 59, "to": 69, "virtue": "Śraddhā", "virtueGu": "શ્રદ્ધા", "descGu": "શ્રદ્ધા અને નિષ્ઠા અંતિમ તબક્કે મદદ કરે છે.", "stage": 5 }
   ],
   "snakes": [
-    { "from": 18, "to": 6, "vice": "Krodha", "viceGu": "ક્રોધ", "descGu": "ક્રોધ આત્માને પાછળ ખેંચે છે." },
-    { "from": 25, "to": 11, "vice": "Lobha", "viceGu": "લોભ", "descGu": "લોભ અને અતિસ્વાર્થ." },
-    { "from": 33, "to": 19, "vice": "Ahaṃkāra", "viceGu": "અહંકાર", "descGu": "અહંકાર પતનનું કારણ બને છે." },
-    { "from": 39, "to": 22, "vice": "Asatya", "viceGu": "અસત્ય", "descGu": "અસત્ય અને છલકપટ." },
-    { "from": 47, "to": 29, "vice": "Moha", "viceGu": "મોહ", "descGu": "મોહ અને આસક્તિ." },
-    { "from": 53, "to": 34, "vice": "Īrṣyā", "viceGu": "ઈર્ષ્યા", "descGu": "ઈર્ષ્યા અને દ્વેષ." },
-    { "from": 62, "to": 41, "vice": "Mad", "viceGu": "મદ", "descGu": "મદ અને અતિ-અહં." },
-    { "from": 68, "to": 49, "vice": "Pramāda", "viceGu": "પ્રમાદ", "descGu": "પ્રમાદ અને અસાવધાની." },
-    { "from": 71, "to": 55, "vice": "Āsakti", "viceGu": "આસક્તિ", "descGu": "અંતિમ તબક્કે પણ આસક્તિ પાછળ ખેંચી શકે છે." }
+    { "from": 14, "to": 5, "vice": "Krodha", "viceGu": "ક્રોધ", "descGu": "ક્રોધ આત્માને પાછળ ખેંચે છે.", "stage": 2 },
+    { "from": 20, "to": 7, "vice": "Lobha", "viceGu": "લોભ", "descGu": "લોભ અને અતિસ્વાર્થ.", "stage": 2 },
+    { "from": 29, "to": 13, "vice": "Ahaṃkāra", "viceGu": "અહંકાર", "descGu": "અહંકાર પતનનું કારણ બને છે.", "stage": 3 },
+    { "from": 34, "to": 18, "vice": "Asatya", "viceGu": "અસત્ય", "descGu": "અસત્ય અને છલકપટ.", "stage": 3 },
+    { "from": 42, "to": 24, "vice": "Moha", "viceGu": "મોહ", "descGu": "મોહ અને આસક્તિ.", "stage": 4 },
+    { "from": 49, "to": 31, "vice": "Īrṣyā", "viceGu": "ઈર્ષ્યા", "descGu": "ઈર્ષ્યા અને દ્વેષ.", "stage": 5 },
+    { "from": 55, "to": 37, "vice": "Mad", "viceGu": "મદ", "descGu": "મદ અને અતિ-અહં.", "stage": 5 },
+    { "from": 63, "to": 44, "vice": "Pramāda", "viceGu": "પ્રમાદ", "descGu": "પ્રમાદ અને અસાવધાની.", "stage": 6 },
+    { "from": 70, "to": 48, "vice": "Āsakti", "viceGu": "આસક્તિ", "descGu": "અંતિમ તબક્કે પણ આસક્તિ પાછળ ખેંચી શકે છે.", "stage": 6 }
   ]
 }
