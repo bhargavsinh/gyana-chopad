@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "title": "Gyāna Chopad",
+  "titleGu": "જ્ઞાન ચોપડ",
+  "subtitleGu": "ભારતીય જ્ઞાન અને કર્મનું શૈક્ષણિક ચોપડ",
+  "totalSquares": 72,
+  "rows": 9,
+  "cols": 8,
+  "winSquare": 72,
+  "exactWinRequired": true,
+  "description": "Educational adaptation inspired by traditional Indian Gyan Chaupar (72-square Vaishnava-style layouts). Original educational design for V1.0. Not a reconstruction of any single historical board.",
+  "stages": [
+    { "id": 1, "name": "Jīvan ane Ichchhā", "nameGu": "જીવન અને ઇચ્છા", "nameEn": "Life and Desires", "range": [1, 12], "color": "#8B5A2B" },
+    { "id": 2, "name": "Ātma-jñān", "nameGu": "આત્મ-જ્ઞાન", "nameEn": "Self-awareness", "range": [13, 24], "color": "#C9A227" },
+    { "id": 3, "name": "Dharma ane Nīti", "nameGu": "ધર્મ અને નીતિ", "nameEn": "Ethics and Dharma", "range": [25, 36], "color": "#2E7D32" },
+    { "id": 4, "name": "Jñān ane Vivek", "nameGu": "જ્ઞાન અને વિવેક", "nameEn": "Knowledge and Discernment", "range": [37, 48], "color": "#1E3A5F" },
+    { "id": 5, "name": "Sādhanā ane Bhakti", "nameGu": "સાધના અને ભક્તિ", "nameEn": "Practice and Devotion", "range": [49, 60], "color": "#5C2D91" },
+    { "id": 6, "name": "Param-lakṣya", "nameGu": "પરમ-લક્ષ્ય", "nameEn": "Spiritual Goal", "range": [61, 72], "color": "#8B6914" }
+  ],
+  "serpentine": true,
+  "startOffBoard": false,
+  "notes": "Win condition and exact-roll rule are configurable game mechanics for clarity and fairness in multiplayer play. Traditional boards varied in win square placement and movement rules."
+}
