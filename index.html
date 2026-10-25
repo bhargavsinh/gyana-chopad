@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="Gyāna Chopad V1.3 — ભારતીય જ્ઞાન ચોપડ. Educational Gyan Chaupar board game." />
-  <meta name="theme-color" content="#5C2D91" />
+  <meta name="description" content="Gyāna Chopad V1.5 — ભારતીય જ્ઞાન ચોપડ. Traditional board, two dice." />
+  <meta name="theme-color" content="#A05A10" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'" />
   <meta name="referrer" content="no-referrer" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <title>જ્ઞાન ચોપડ | Gyāna Chopad V1.3</title>
+  <title>જ્ઞાન ચોપડ | Gyāna Chopad V1.5</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
@@ -34,6 +34,9 @@
       }
     }
   </script>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/board-traditional.css" />
+  <link rel="stylesheet" href="css/tokens-animations.css" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="bg-ivory text-ink font-gujarati antialiased min-h-screen">
@@ -42,11 +45,11 @@
     <div class="relative z-10 max-w-md w-full text-center space-y-6">
       <div class="space-y-2">
         <h1 class="text-4xl md:text-5xl font-bold text-maroon tracking-wide">જ્ઞાન ચોપડ</h1>
-        <p class="text-lg text-saffron font-display italic">Gyāna Chopad V1.3</p>
-        <p class="text-sm text-ink/80">ભારતીય જ્ઞાન અને કર્મનું શૈક્ષણિક ચોપડ</p>
+        <p class="text-lg text-saffron font-display italic">Gyāna Chopad V1.5</p>
+        <p class="text-sm text-ink/80">પરંપરાગત બોર્ડ · બે પાસા · શૈક્ષણિક ચોપડ</p>
       </div>
       <div class="bg-white/60 border border-antiquegold/40 rounded-xl p-5 shadow-sm text-left space-y-3">
-        <p class="text-sm leading-relaxed">પરંપરાગત જ્ઞાન ચોપડથી પ્રેરિત શૈક્ષણિક રમત. ૭૨ ખાનાં, સર્પ-નિસરણી, સદ્ગુણો અને દોષો.</p>
+        <p class="text-sm leading-relaxed">પરંપરાગત જ્ઞાન ચોપડથી પ્રેરિત. ૭૨ ખાનાં, સર્પ-નિસરણી, સદ્ગુણો અને દોષો. હવે બે પાસા (૨–૧૨).</p>
         <p class="text-xs text-ink/70">મૂળ શૈક્ષણિક રચના — કોઈ એક ઐતિહાસિક બોર્ડની પુનર્નિર્માણી નથી.</p>
       </div>
       <div class="space-y-3">
@@ -64,7 +67,7 @@
           <button type="button" data-mode="classic" class="mode-btn active flex-1 py-2 rounded-lg border-2 border-deepgreen bg-deepgreen text-ivory text-sm font-semibold">ક્લાસિક</button>
           <button type="button" data-mode="reflection" class="mode-btn flex-1 py-2 rounded-lg border-2 border-deepgreen/40 text-deepgreen text-sm font-semibold">વિચારશીલ</button>
         </div>
-        <p id="mode-desc" class="text-xs text-ink/70 text-left">સર્પ-નિસરણી અને પાસા સાથે સીધી રમત. સાપ = પાછળ, સીડી = આગળ.</p>
+        <p id="mode-desc" class="text-xs text-ink/70 text-left">બે પાસા + સર્પ-નિસરણી. સાપ = પાછળ, સીડી = આગળ.</p>
       </div>
       <div class="flex items-center gap-2 text-left">
         <input type="checkbox" id="exact-win" checked class="rounded border-maroon text-maroon focus:ring-maroon" />
@@ -83,7 +86,8 @@
         <button id="btn-close-rules" class="text-2xl text-ink/60 hover:text-ink">&times;</button>
       </div>
       <div class="text-sm space-y-3 leading-relaxed">
-        <p><strong>બોર્ડ:</strong> ૭૨ ખાનાં, છ તબક્કા.</p>
+        <p><strong>બોર્ડ:</strong> ૭૨ ખાનાં, પરંપરાગત manuscript શૈલી.</p>
+        <p><strong>પાસા:</strong> બે પાસા — સરવાળો ૨ થી ૧૨. ટોકન એટલા ખાનાં આગળ.</p>
         <p><strong>સીડી:</strong> સદ્ગુણ — ઉપર. <strong>સાપ:</strong> દોષ — પાછળ.</p>
         <p><strong>જીત:</strong> ૭૨ (ચોક્કસ પાસો વિકલ્પ).</p>
       </div>
@@ -103,8 +107,8 @@
     </header>
     <div class="flex-1 flex flex-col lg:flex-row gap-2 p-2 max-w-6xl mx-auto w-full">
       <div class="flex-1 flex flex-col items-center">
-        <div id="board-wrapper" class="relative w-full max-w-[min(100vw-1rem,520px)] aspect-[8/9] bg-parchment border-2 border-antiquegold rounded-lg shadow-inner overflow-hidden">
-          <div id="board" class="grid grid-cols-8 grid-rows-9 w-full h-full gap-px bg-antiquegold/30 p-px"></div>
+        <div id="board-wrapper" class="relative w-full max-w-[min(100vw-1rem,520px)] aspect-[8/9] overflow-hidden">
+          <div id="board" class="grid grid-cols-8 grid-rows-9 w-full h-full"></div>
           <div id="tokens-layer" class="absolute inset-0 pointer-events-none"></div>
         </div>
         <div id="stage-legend" class="mt-2 flex flex-wrap gap-1 justify-center text-[10px]"></div>
@@ -115,8 +119,12 @@
           <p id="current-player-name" class="text-lg font-bold text-maroon">—</p>
           <p id="current-player-pos" class="text-sm">સ્થાન: ૦</p>
           <div class="flex items-center gap-3">
-            <button id="btn-dice" class="flex-1 py-3 rounded-xl bg-saffron text-white font-bold text-lg shadow hover:bg-saffron/90 disabled:opacity-50 disabled:cursor-not-allowed transition">પાસો નાખો</button>
-            <div id="dice-display" class="w-14 h-14 rounded-lg border-2 border-maroon bg-ivory flex items-center justify-center text-2xl font-bold text-maroon">—</div>
+            <button id="btn-dice" class="flex-1 py-3 rounded-xl bg-saffron text-white font-bold text-lg shadow hover:bg-saffron/90 disabled:opacity-50 disabled:cursor-not-allowed transition">પાસા નાખો</button>
+            <div class="dice-row">
+              <div id="dice-d1" class="dice-face" aria-label="પાસો ૧">—</div>
+              <div id="dice-d2" class="dice-face" aria-label="પાસો ૨">—</div>
+              <span id="dice-total" class="dice-total"></span>
+            </div>
           </div>
           <p id="move-message" class="text-xs text-ink/70 min-h-[1.25rem]"></p>
           <p id="help-tip" class="help-tip"></p>
