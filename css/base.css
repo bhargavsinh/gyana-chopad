@@ -1,0 +1,53 @@
+/* Gyāna Chopad V1.5 — base layout & theme tokens */
+:root {
+  --ivory: #F8F1E3;
+  --parchment: #F5E6C8;
+  --manuscript: #FFF8E7;
+  --ink: #2C1810;
+  --maroon: #6B2D3C;
+  --saffron: #C45C26;
+  --antiquegold: #B8860B;
+  --cell-border: #C47820;
+  --cell-border-dark: #A05A10;
+  --ladder: #C45C6A;
+  --ladder-stroke: #E8A0A8;
+  --snake: #1A1210;
+  --snake-mid: #3D2820;
+  --token-1: #C45C26;
+  --token-2: #1E3A5F;
+  --token-3: #2E7D32;
+  --token-4: #5C2D91;
+  --frame-red: #8B2E2E;
+  --frame-green: #2D5A3D;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.screen { animation: fadeIn 0.35s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+button:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.help-tip {
+  font-size: 0.75rem;
+  color: var(--maroon);
+  min-height: 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
