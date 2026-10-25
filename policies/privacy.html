@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html lang="gu">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"/>
-<meta name="description" content="Gyāna Chopad ગોપનીયતા નીતિ — કોઈ એકાઉન્ટ નથી, કોઈ ટ્રેકિંગ SDK નથી."/>
-<title>ગોપનીયતા નીતિ | Privacy — Gyāna Chopad V1.4</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap" rel="stylesheet"/>
-<style>
-body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:#F8F1E3;color:#2C1810;margin:0;line-height:1.75}
-header{background:#6B2D3C;color:#F8F1E3;padding:0.9rem 1.25rem;position:sticky;top:0}
-header a{color:#F8F1E3;text-decoration:none;margin-right:1rem;font-size:0.9rem}
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="અમે કયો ડેટા એકત્રિત કરતા નથી અને સ્થાનિક રમત કેવી રીતે કાર્ય કરે છે."/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>ગોપનીયતા નીતિ | Gyāna Chopad V1.4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+:root{--maroon:#6B2D3C;--saffron:#C45C26;--ivory:#F8F1E3;--ink:#2C1810}
+body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:var(--ivory);color:var(--ink);margin:0;line-height:1.75}
+header{background:var(--maroon);color:#F8F1E3;padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:1rem}
+header a{color:#F8F1E3;text-decoration:none;font-size:.9rem}
 main{max-width:44rem;margin:0 auto;padding:1.75rem 1.25rem 3rem}
-h1{color:#6B2D3C;font-size:1.55rem}
-h2{color:#8B4513;font-size:1.12rem;margin-top:1.6rem;border-bottom:1px solid #B8860B40;padding-bottom:0.2rem}
-.card{background:#fff9;border:1px solid #B8860B55;border-radius:0.75rem;padding:1rem;margin:1rem 0}
-.badge{display:inline-block;background:#6B2D3C18;color:#6B2D3C;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:999px}
-a{color:#C45C26}ul{padding-left:1.3rem}footer{text-align:center;padding:2rem;font-size:0.8rem;opacity:0.75}
-</style>
+h1{color:var(--maroon);font-size:1.65rem;margin:0 0 .35rem}
+.sub{color:var(--saffron);font-style:italic;margin:0 0 1.25rem}
+h2{color:var(--maroon);font-size:1.15rem;margin:1.75rem 0 .6rem;border-bottom:1px solid #B8860B44;padding-bottom:.35rem}
+ul{padding-left:1.35rem}li{margin:.35rem 0}
+.card{background:#fffdf8;border:1px solid #B8860B55;border-radius:.85rem;padding:1rem 1.15rem;margin:1rem 0}
+a{color:var(--saffron)}
+.muted{opacity:.8;font-size:.88rem}
+footer{text-align:center;padding:2rem;font-size:.8rem;opacity:.75;border-top:1px solid #B8860B33;margin-top:2rem}
+  </style>
 </head>
 <body>
-<header><a href="../index.html">← રમત</a><a href="index.html">Policy Center</a></header>
+<header>
+  <a href="../index.html">← રમત</a>
+  <a href="index.html">Policy Center</a>
+  <a href="security.html">સુરક્ષા</a>
+  <a href="terms.html">શરતો</a>
+</header>
 <main>
-<span class="badge">V1.4 · અપડેટ: 2026-10-24</span>
-<h1>ગોપનીયતા નીતિ</h1>
-<p style="color:#C45C26;font-style:italic">Privacy Policy</p>
-<div class="card"><p>Gyāna Chopad કયો વ્યક્તિગત ડેટા એકત્રિત કરતું <strong>નથી</strong>, અને બ્રાઉઝરમાં શું સ્થાનિક રહે છે — તેની સ્પષ્ટતા.</p></div>
+  <h1>ગોપનીયતા નીતિ</h1>
+  <p class="sub">Privacy Policy · Gyāna Chopad V1.4</p>
+  <div class="card"><p>અમે કયો ડેટા એકત્રિત કરતા નથી અને સ્થાનિક રમત કેવી રીતે કાર્ય કરે છે.</p></div>
 
-<h2>1. સારાંશ (સરળ ભાષામાં)</h2>
-<p>આ રમત <strong>સ્થિર વેબસાઇટ</strong> છે. તમે પેજ ખોલો, પાસો નાખો, રમો — અમારી તરફથી કોઈ એકાઉન્ટ, ઇમેઇલ ફોર્મ, અથવા વ્યક્તિગત પ્રોફાઇલ સર્વર પર સાચવાતી નથી.</p>
+  <h2>૧. પરિચય</h2>
+  <p>Gyāna Chopad એક <strong>static web application</strong> છે જે GitHub Pages પર હોસ્ટ થાય છે. રમત તમારા બ્રાઉઝરમાં ચાલે છે. આ નીતિ સમજાવે છે કે અમે કયો ડેટા <em>એકત્રિત કરતા નથી</em>, અને રમત દરમિયાન શું ફક્ત તમારા ઉપકરણ પર રહે છે.</p>
 
-<h2>2. અમે શું એકત્રિત કરતા નથી</h2>
-<ul>
-<li>નામ, ઇમેઇલ, ફોન, સરનામું (સર્વર પર)</li>
-<li>લૉગિન / પાસવર્ડ</li>
-<li>ચુકવણી અથવા ખરીદી માહિતી</li>
-<li>જાહેરાત ઓળખકર્તાઓ (ad IDs)</li>
-<li>તૃતીય-પક્ષ એનાલિટિક્સ (Google Analytics વગેરે રમત કોડમાં નથી)</li>
-<li>સ્થાન (GPS) ની માંગણી</li>
-</ul>
+  <h2>૨. અમે શું એકત્રિત કરતા નથી</h2>
+  <ul>
+    <li>નામ, ઇમેઇલ, ફોન નંબર અથવા સરનામું — કોઈ નોંધણી ફોર્મ નથી</li>
+    <li>લૉગિન / એકાઉન્ટ / પાસવર્ડ</li>
+    <li>ચુકવણી અથવા બિલિંગ માહિતી</li>
+    <li>સ્થાન (GPS) — રમત સ્થાન માંગતી નથી</li>
+    <li>જાહેરાત અથવા વર્તણૂકીય ટ્રેકિંગ માટે તૃતીય-પક્ષ analytics — રમત કોડમાં નથી</li>
+    <li>કેમેરા, માઇક્રોફોન અથવા સંપર્કોની ઍક્સેસ</li>
+  </ul>
 
-<h2>3. બ્રાઉઝરમાં શું થાય છે</h2>
-<ul>
-<li><strong>ખેલાડી નામો:</strong> માત્ર ચાલુ સત્રની મેમરીમાં. પેજ બંધ/રિફ્રેશ થતાં સામાન્ય રીતે સાફ.</li>
-<li><strong>રમતની સ્થિતિ:</strong> ટોકન, પાસો — JavaScript મેમરીમાં.</li>
-<li><strong>સેનિટાઇઝેશન:</strong> નામમાંથી જોખમી અક્ષરો દૂર.</li>
-</ul>
+  <div class="card">
+    <strong>ખેલાડી નામો:</strong> જે નામ તમે દાખલ કરો છો તે માત્ર તમારા બ્રાઉઝરની મેમરીમાં રમત સત્ર દરમિયાન રહે છે. પેજ બંધ અથવા રિફ્રેશ થતાં તે સાફ થઈ જાય છે (જ્યાં સુધી ભવિષ્યમાં સ્પષ્ટ localStorage વિકલ્પ ઉમેરવામાં ન આવે).
+  </div>
 
-<h2>4. હોસ્ટિંગ (GitHub Pages)</h2>
-<p>હોસ્ટિંગ પ્લેટફોર્મ સ્તરે સર્વર લોગ્સ (IP, User-Agent) રાખી શકે — GitHub ની નીતિ અનુસાર. રમત કોડ “યુઝર પ્રોફાઇલ” બનાવતો નથી.</p>
+  <h2>૩. સ્થાનિક (device-side) ડેટા</h2>
+  <p>રમતની સ્થિતિ — ટોકન સ્થાન, વારો, પાસાની કિંમત, મોડ — JavaScript મેમરીમાં રહે છે. આ ડેટા અમારા સર્વર પર મોકલાતો નથી, કારણ કે રમત માટે કોઈ એપ્લિકેશન સર્વર નથી.</p>
 
-<h2>5. બાહ્ય સ્ત્રોતો</h2>
-<ul>
-<li>Google Fonts — ફોન્ટ લોડ.</li>
-<li>Tailwind CDN — સ્ટાઇલ (જો વપરાય).</li>
-</ul>
-<p>આ સેવાઓની પોતાની ગોપનીયતા નીતિઓ લાગુ પડે.</p>
+  <h2>૪. હોસ્ટિંગ અને લોગ્સ</h2>
+  <p>સાઇટ GitHub Pages દ્વારા પીરસાય છે. હોસ્ટિંગ પ્લેટફોર્મ તકનીકી લોગ્સ (IP, user-agent, વિનંતી સમય) રાખી શકે છે — તે GitHub ની નીતિઓ અનુસાર છે, આ રમતના કોડ દ્વારા નિયંત્રિત નથી.</p>
 
-<h2>6. બાળકો</h2>
-<p>જાણી જોઈને 13 વર્ષથી નાના બાળકોનો વ્યક્તિગત ડેટા એકત્રિત કરતા નથી. પરિવાર સાથે વયસ્ક માર્ગદર્શન યોગ્ય.</p>
+  <h2>૫. તૃતીય-પક્ષ સંસાધનો</h2>
+  <ul>
+    <li><strong>Tailwind CSS CDN</strong> — સ્ટાઇલ માટે</li>
+    <li><strong>Google Fonts</strong> — નોટો સાન્સ ગુજરાતી / ડિસ્પ્લે ફોન્ટ</li>
+  </ul>
+  <p>આ સેવાઓ તમારા બ્રાઉઝરથી સીધી લોડ થાય છે. તેમની પોતાની privacy practices લાગુ પડે છે.</p>
 
-<h2>7. તમારા અધિકારો</h2>
-<ul>
-<li>પેજ બંધ — સત્ર ડેટા સાફ.</li>
-<li>બ્રાઉઝર કેશ/સ્ટોરેજ સાફ.</li>
-<li>એકાઉન્ટ ડિલીટની જરૂર નથી — એકાઉન્ટ જ નથી.</li>
-</ul>
+  <h2>૬. બાળકો</h2>
+  <p>રમત શૈક્ષણિક છે અને પારિવારિક ઉપયોગ માટે યોગ્ય ગણાય. અમે જાણીને ૧૩ વર્ષથી નાના બાળકોની વ્યક્તિગત માહિતી એકત્રિત કરતા નથી — કારણ કે અમે કોઈ personal data એકત્રિત જ કરતા નથી. નાના બાળકો સાથે વયસ્કની હાજરી યોગ્ય છે. <a href="family-friendly.html">પારિવારિક ઉપયોગ</a> જુઓ.</p>
 
-<h2>8. ફેરફારો</h2>
-<p>નીતિ અપડેટ થઈ શકે. મહત્વના ફેરફારો Policy Center અને CHANGELOG માં.</p>
+  <h2>૭. તમારા અધિકારો અને સંપર્ક</h2>
+  <p>કોઈ એકાઉન્ટ ન હોવાથી “એકાઉન્ટ કાઢી નાખો” જેવી પ્રક્રિયા લાગુ પડતી નથી. પ્રશ્નો અથવા સુરક્ષા રિપોર્ટ માટે GitHub repository પર issue ખોલો.</p>
+
+  <p class="muted">આ નીતિ V1.4 સાથે અપડેટ થઈ. મોટા ફેરફારો પર CHANGELOG / આ પૃષ્ઠ અપડેટ થશે.</p>
 </main>
-<footer>Gyāna Chopad V1.4 · માહિતી માટે; કાનૂની સલાહ નથી · <a href="index.html">નીતિ કેન્દ્ર</a></footer>
+<footer>Gyāna Chopad V1.4 · Educational static game · Not legal advice<br/><a href="index.html">નીતિ કેન્દ્ર</a></footer>
 </body>
 </html>

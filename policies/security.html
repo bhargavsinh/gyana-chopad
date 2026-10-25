@@ -1,2 +1,87 @@
 <!DOCTYPE html>
-<html lang="gu"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'"/><title>સુરક્ષા | Security</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600&display=swap" rel="stylesheet"/><style>body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:#F8F1E3;margin:0;padding:1.5rem;max-width:40rem;margin-inline:auto}a{color:#C45C26}</style></head><body><p><a href="index.html">← Policy Center</a></p><h1>સુરક્ષા નીતિ</h1><ul><li>Static site — કોઈ બેકએન્ડ નથી.</li><li>ખેલાડી નામો client-side sanitize.</li><li>CSP meta tags.</li><li>કોઈ remote game API નથી.</li></ul><p>વાસ્તવિક નિયંત્રણો; માર્કેટિંગ “ultra security” નહીં.</p></body></html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Static site માટે વાસ્તવિક સુરક્ષા નિયંત્રણો — માર્કેટિંગ નહીં."/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"/>
+  <title>સુરક્ષા નીતિ | Gyāna Chopad V1.4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+:root{--maroon:#6B2D3C;--saffron:#C45C26;--ivory:#F8F1E3;--ink:#2C1810;--green:#1F4D3A}
+body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:var(--ivory);color:var(--ink);margin:0;line-height:1.75}
+header{background:var(--maroon);color:#F8F1E3;padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:1rem}
+header a{color:#F8F1E3;text-decoration:none;font-size:.9rem}
+main{max-width:44rem;margin:0 auto;padding:1.75rem 1.25rem 3rem}
+h1{color:var(--maroon);font-size:1.65rem}
+.sub{color:var(--saffron);font-style:italic;margin:0 0 1.25rem}
+h2{color:var(--maroon);font-size:1.15rem;margin:1.75rem 0 .6rem;border-bottom:1px solid #B8860B44;padding-bottom:.35rem}
+h3{color:var(--green);font-size:1.02rem;margin:1.25rem 0 .4rem}
+ul{padding-left:1.35rem}li{margin:.35rem 0}
+.card{background:#fffdf8;border:1px solid #B8860B55;border-radius:.85rem;padding:1rem;margin:1rem 0}
+.note{background:#6B2D3C10;border-left:4px solid var(--maroon);padding:.75rem 1rem;margin:1rem 0}
+code{background:#0001;padding:.1rem .35rem;border-radius:.25rem;font-size:.88em}
+a{color:var(--saffron)}
+.muted{opacity:.8;font-size:.88rem}
+footer{text-align:center;padding:2rem;font-size:.8rem;opacity:.75;border-top:1px solid #B8860B33;margin-top:2rem}
+  </style>
+</head>
+<body>
+<header>
+  <a href="../index.html">← રમત</a>
+  <a href="index.html">Policy Center</a>
+  <a href="privacy.html">ગોપનીયતા</a>
+</header>
+<main>
+  <h1>સુરક્ષા નીતિ</h1>
+  <p class="sub">Security Policy · Gyāna Chopad V1.4</p>
+  <div class="card"><p>Static site માટે વાસ્તવિક સુરક્ષા નિયંત્રણો — માર્કેટિંગ નહીં.</p></div>
+
+  <h2>૧. વાસ્તવિકતા સાથે શરૂઆત</h2>
+  <p>Gyāna Chopad એક <strong>static, client-only</strong> શૈક્ષણિક રમત છે. કોઈ યુઝર એકાઉન્ટ, કોઈ API backend, કોઈ ચુકવણી સિસ્ટમ નથી. તેથી “enterprise security product” જેવા દાવા અહીં લાગુ પડતા નથી. આ પૃષ્ઠ <em>ખરેખર શું કરવામાં આવ્યું છે</em> તે જણાવે છે.</p>
+
+  <div class="note">
+    <strong>સિદ્ધાંત:</strong> જે ડેટા એકત્રિત જ નથી થતો, તે લીક થઈ શકતો નથી. સૌથી મજબૂત privacy control ઘણી વાર minimal data collection હોય છે.
+  </div>
+
+  <h2>૨. અમલમાં મૂકાયેલા નિયંત્રણો</h2>
+  <h3>૨.૧ Client-side input safety</h3>
+  <ul>
+    <li>ખેલાડી નામો <code>js/security.js</code> દ્વારા sanitize થાય છે</li>
+    <li>HTML/script અક્ષરો દૂર; લંબાઈ મર્યાદા (૨૦ અક્ષર)</li>
+    <li>નામો UIમાં text તરીકે રજૂ — arbitrary HTML તરીકે નહીં</li>
+  </ul>
+
+  <h3>૨.૨ Content Security Policy (CSP)</h3>
+  <p>મુખ્ય પેજ અને policy પૃષ્ઠો પર CSP meta ટેગ છે. હેતુ: અનધિકૃત script/style સ્ત્રોતો મર્યાદિત કરવા.</p>
+
+  <h3>૨.૩ અન્ય</h3>
+  <ul>
+    <li><code>referrer</code> policy: no-referrer</li>
+    <li>Relative paths — deployment portable</li>
+    <li>કોઈ form POST / remote game API નથી</li>
+    <li><code>.well-known/security.txt</code> — સુરક્ષા સંપર્ક માર્ગ</li>
+  </ul>
+
+  <h2>૩. શું “Ultra security” નથી</h2>
+  <ul>
+    <li>કોઈ penetration-test certificate અથવા SOC2 દાવો નથી</li>
+    <li>કોઈ end-to-end encryption of “accounts” — accounts જ નથી</li>
+    <li>CDN અને fonts તૃતીય-પક્ષ છે</li>
+    <li>GitHub Pages પ્લેટફોર્મ-level controls અલગ છે</li>
+  </ul>
+
+  <h2>૪. જવાબદાર વપરાશકર્તા વર્તન</h2>
+  <ul>
+    <li>અજાણ્યા forks પર personal data ન નાખો</li>
+    <li>જો તમે fork કરો તો CSP અને sanitize જાળવો</li>
+    <li>સંવેદનશીલ માહિતી ખેલાડી નામમાં ન લખો</li>
+  </ul>
+
+  <h2>૫. સમસ્યા રિપોર્ટ</h2>
+  <p>સુરક્ષા સંબંધિત મુદ્દા માટે GitHub repository પર issue ખોલો, અથવા <code>.well-known/security.txt</code> માં જણાવેલ માર્ગ અનુસરો.</p>
+  <p class="muted">વધુ: docs/SECURITY.md</p>
+</main>
+<footer>Gyāna Chopad V1.4<br/><a href="index.html">નીતિ કેન્દ્ર</a></footer>
+</body>
+</html>
