@@ -38,6 +38,29 @@
   <link rel="stylesheet" href="css/board-traditional.css" />
   <link rel="stylesheet" href="css/tokens-animations.css" />
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    #btn-dice {
+      background: linear-gradient(180deg, #E06A2E 0%, #B8431A 100%) !important;
+      color: #fff !important;
+      border: 2px solid #8B2E12 !important;
+      box-shadow: 0 3px 0 #8B2E12, 0 4px 12px rgba(180,60,20,0.35);
+      min-height: 3rem;
+      opacity: 1 !important;
+    }
+    #btn-dice:disabled {
+      background: linear-gradient(180deg, #C4A090, #A08070) !important;
+      border-color: #806050 !important;
+      box-shadow: none;
+      opacity: 0.85 !important;
+    }
+    .dice-face {
+      width: 2.75rem; height: 2.75rem;
+      border: 2px solid #6B2D3C; border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem; font-weight: 800;
+      background: #FFFDF8; color: #6B2D3C;
+    }
+  </style>
 </head>
 <body class="bg-ivory text-ink font-gujarati antialiased min-h-screen">
   <div id="screen-start" class="screen min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -49,8 +72,7 @@
         <p class="text-sm text-ink/80">પરંપરાગત બોર્ડ · બે પાસા · શૈક્ષણિક ચોપડ</p>
       </div>
       <div class="bg-white/60 border border-antiquegold/40 rounded-xl p-5 shadow-sm text-left space-y-3">
-        <p class="text-sm leading-relaxed">પરંપરાગત જ્ઞાન ચોપડથી પ્રેરિત. ૭૨ ખાનાં, સર્પ-નિસરણી, સદ્ગુણો અને દોષો. હવે બે પાસા (૨–૧૨).</p>
-        <p class="text-xs text-ink/70">મૂળ શૈક્ષણિક રચના — કોઈ એક ઐતિહાસિક બોર્ડની પુનર્નિર્માણી નથી.</p>
+        <p class="text-sm leading-relaxed">પરંપરાગત જ્ઞાન ચોપડથી પ્રેરિત. ૭૨ ખાનાં, સર્પ-નિસરણી. બે પાસા (૨–૧૨).</p>
       </div>
       <div class="space-y-3">
         <label class="block text-sm font-medium text-left">ખેલાડીઓની સંખ્યા (૨–૪)</label>
@@ -67,15 +89,15 @@
           <button type="button" data-mode="classic" class="mode-btn active flex-1 py-2 rounded-lg border-2 border-deepgreen bg-deepgreen text-ivory text-sm font-semibold">ક્લાસિક</button>
           <button type="button" data-mode="reflection" class="mode-btn flex-1 py-2 rounded-lg border-2 border-deepgreen/40 text-deepgreen text-sm font-semibold">વિચારશીલ</button>
         </div>
-        <p id="mode-desc" class="text-xs text-ink/70 text-left">બે પાસા + સર્પ-નિસરણી. સાપ = પાછળ, સીડી = આગળ.</p>
+        <p id="mode-desc" class="text-xs text-ink/70 text-left">બે પાસા + સર્પ-નિસરણી.</p>
       </div>
       <div class="flex items-center gap-2 text-left">
-        <input type="checkbox" id="exact-win" checked class="rounded border-maroon text-maroon focus:ring-maroon" />
+        <input type="checkbox" id="exact-win" checked class="rounded border-maroon text-maroon" />
         <label for="exact-win" class="text-sm">જીત માટે ચોક્કસ પાસો જરૂરી</label>
       </div>
-      <button id="btn-start" class="w-full py-3 rounded-xl bg-saffron hover:bg-saffron/90 text-white font-bold text-lg shadow-md transition">રમત શરૂ કરો</button>
-      <button id="btn-rules" class="w-full py-2 text-sm text-maroon underline">નિયમો જુઓ</button>
-      <p class="text-xs"><a href="policies/index.html" class="text-maroon underline">Policy Center / નીતિ કેન્દ્ર</a></p>
+      <button id="btn-start" type="button" class="w-full py-3 rounded-xl font-bold text-lg shadow-md" style="background:linear-gradient(180deg,#E06A2E,#B8431A);color:#fff;border:2px solid #8B2E12;">રમત શરૂ કરો</button>
+      <button id="btn-rules" type="button" class="w-full py-2 text-sm text-maroon underline">નિયમો જુઓ</button>
+      <p class="text-xs"><a href="policies/index.html" class="text-maroon underline">Policy Center</a></p>
     </div>
   </div>
 
@@ -83,26 +105,25 @@
     <div class="bg-ivory max-w-lg w-full max-h-[85vh] overflow-y-auto rounded-xl border-2 border-antiquegold p-5 space-y-4">
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-bold text-maroon">નિયમો</h2>
-        <button id="btn-close-rules" class="text-2xl text-ink/60 hover:text-ink">&times;</button>
+        <button id="btn-close-rules" type="button" class="text-2xl">&times;</button>
       </div>
-      <div class="text-sm space-y-3 leading-relaxed">
-        <p><strong>બોર્ડ:</strong> ૭૨ ખાનાં, પરંપરાગત manuscript શૈલી.</p>
-        <p><strong>પાસા:</strong> બે પાસા — સરવાળો ૨ થી ૧૨. ટોકન એટલા ખાનાં આગળ.</p>
-        <p><strong>સીડી:</strong> સદ્ગુણ — ઉપર. <strong>સાપ:</strong> દોષ — પાછળ.</p>
-        <p><strong>જીત:</strong> ૭૨ (ચોક્કસ પાસો વિકલ્પ).</p>
+      <div class="text-sm space-y-3">
+        <p><strong>પાસા:</strong> બે પાસા — સરવાળો ૨–૧૨.</p>
+        <p><strong>સીડી:</strong> ઉપર. <strong>સાપ:</strong> પાછળ.</p>
+        <p><strong>જીત:</strong> ૭૨ પર પહોંચો.</p>
       </div>
     </div>
   </div>
 
   <div id="screen-game" class="screen hidden min-h-screen flex flex-col">
-    <header class="bg-maroon text-ivory px-3 py-2 flex items-center justify-between sticky top-0 z-20 shadow">
+    <header class="px-3 py-2 flex items-center justify-between sticky top-0 z-30 shadow" style="background:#6B2D3C;color:#F8F1E3;">
       <div>
         <h1 class="text-lg font-bold leading-tight">જ્ઞાન ચોપડ</h1>
         <p id="current-mode-label" class="text-xs opacity-80">ક્લાસિક મોડ</p>
       </div>
       <div class="flex gap-2">
-        <button id="btn-game-rules" class="text-xs px-2 py-1 rounded border border-ivory/40 hover:bg-white/10">નિયમો</button>
-        <button id="btn-restart" class="text-xs px-2 py-1 rounded border border-ivory/40 hover:bg-white/10">નવી રમત</button>
+        <button id="btn-game-rules" type="button" class="text-xs px-2 py-1 rounded border border-white/40">નિયમો</button>
+        <button id="btn-restart" type="button" class="text-xs px-2 py-1 rounded border border-white/40">નવી રમત</button>
       </div>
     </header>
     <div class="flex-1 flex flex-col lg:flex-row gap-2 p-2 max-w-6xl mx-auto w-full">
@@ -114,22 +135,22 @@
         <div id="stage-legend" class="mt-2 flex flex-wrap gap-1 justify-center text-[10px]"></div>
       </div>
       <div class="w-full lg:w-72 flex flex-col gap-3">
-        <div id="turn-panel" class="bg-white/70 border border-antiquegold/50 rounded-xl p-3 space-y-2">
+        <div id="turn-panel" class="bg-white border border-antiquegold/50 rounded-xl p-3 space-y-2">
           <p class="text-xs text-ink/60">વર્તમાન ખેલાડી</p>
           <p id="current-player-name" class="text-lg font-bold text-maroon">—</p>
           <p id="current-player-pos" class="text-sm">સ્થાન: ૦</p>
           <div class="flex items-center gap-3">
-            <button id="btn-dice" class="flex-1 py-3 rounded-xl bg-saffron text-white font-bold text-lg shadow hover:bg-saffron/90 disabled:opacity-50 disabled:cursor-not-allowed transition">પાસા નાખો</button>
-            <div class="dice-row">
-              <div id="dice-d1" class="dice-face" aria-label="પાસો ૧">—</div>
-              <div id="dice-d2" class="dice-face" aria-label="પાસો ૨">—</div>
-              <span id="dice-total" class="dice-total"></span>
+            <button id="btn-dice" type="button" class="flex-1 py-3 rounded-xl font-bold text-lg" style="background:linear-gradient(180deg,#E06A2E,#B8431A);color:#fff;border:2px solid #8B2E12;box-shadow:0 3px 0 #8B2E12;min-height:3rem;">પાસા નાખો</button>
+            <div class="dice-row" style="display:flex;gap:0.4rem;align-items:center;">
+              <div id="dice-d1" class="dice-face">—</div>
+              <div id="dice-d2" class="dice-face">—</div>
+              <span id="dice-total" class="dice-total" style="font-weight:700;color:#B8431A;"></span>
             </div>
           </div>
           <p id="move-message" class="text-xs text-ink/70 min-h-[1.25rem]"></p>
           <p id="help-tip" class="help-tip"></p>
         </div>
-        <div id="players-list" class="bg-white/70 border border-antiquegold/50 rounded-xl p-3 space-y-1"></div>
+        <div id="players-list" class="bg-white border border-antiquegold/50 rounded-xl p-3 space-y-1"></div>
       </div>
     </div>
   </div>
@@ -137,31 +158,24 @@
   <div id="modal-card" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-4">
     <div class="bg-ivory max-w-md w-full max-h-[90vh] overflow-y-auto rounded-xl border-2 border-antiquegold p-5 space-y-4">
       <div class="flex justify-between items-start">
-        <span id="card-category" class="text-xs uppercase tracking-wider text-saffron font-semibold"></span>
-        <button id="btn-close-card" class="text-2xl text-ink/50 hover:text-ink leading-none">&times;</button>
+        <span id="card-category" class="text-xs text-saffron font-semibold"></span>
+        <button id="btn-close-card" type="button" class="text-2xl">&times;</button>
       </div>
       <h3 id="card-title" class="text-xl font-bold text-maroon"></h3>
-      <p id="card-explanation" class="text-sm leading-relaxed"></p>
-      <div class="bg-parchment/80 rounded-lg p-3 border border-antiquegold/30">
-        <p class="text-xs font-semibold text-deepgreen mb-1">પરિસ્થિતિ / પ્રશ્ન</p>
-        <p id="card-scenario" class="text-sm"></p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold text-maroon mb-1">શીખ</p>
-        <p id="card-takeaway" class="text-sm"></p>
-      </div>
+      <p id="card-explanation" class="text-sm"></p>
+      <div class="bg-parchment/80 rounded-lg p-3"><p class="text-xs font-semibold mb-1">પરિસ્થિતિ</p><p id="card-scenario" class="text-sm"></p></div>
+      <div><p class="text-xs font-semibold mb-1">શીખ</p><p id="card-takeaway" class="text-sm"></p></div>
       <p id="card-source" class="text-[10px] text-ink/50"></p>
-      <button id="btn-continue-card" class="w-full py-2.5 rounded-xl bg-deepgreen text-ivory font-semibold">આગળ વધો</button>
+      <button id="btn-continue-card" type="button" class="w-full py-2.5 rounded-xl text-white font-semibold" style="background:#1F4D3A;">આગળ વધો</button>
     </div>
   </div>
 
   <div id="modal-win" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-4">
     <div class="bg-ivory max-w-sm w-full rounded-xl border-2 border-antiquegold p-6 text-center space-y-4">
-      <p class="text-3xl celebrate-emoji">🪔</p>
+      <p class="text-3xl">🪔</p>
       <h2 class="text-2xl font-bold text-maroon">વિજય!</h2>
       <p id="win-message" class="text-lg"></p>
-      <p class="text-sm text-ink/70">પરમ-લક્ષ્ય સુધી પહોંચ્યા.</p>
-      <button id="btn-new-game" class="w-full py-3 rounded-xl bg-saffron text-white font-bold">નવી રમત</button>
+      <button id="btn-new-game" type="button" class="w-full py-3 rounded-xl font-bold text-white" style="background:linear-gradient(180deg,#E06A2E,#B8431A);">નવી રમત</button>
     </div>
   </div>
 
