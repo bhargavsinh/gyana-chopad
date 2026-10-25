@@ -1,5 +1,5 @@
 /**
- * Gyāna Chopad V1.3 — UI + security sanitization
+ * Gyāna Chopad V1.5 — UI (dual dice + traditional board styles)
  */
 
 import { buildPositionMap, getStageForSquare } from './data.js';
@@ -41,7 +41,7 @@ export class UI {
         this.selectedMode = btn.dataset.mode;
         const desc = document.getElementById('mode-desc');
         if (desc) desc.textContent = this.selectedMode === 'classic'
-          ? 'સર્પ-નિસરણી અને પાસા સાથે સીધી રમત. સાપ = પાછળ, સીડી = આગળ.'
+          ? 'બે પાસા + સર્પ-નિસરણી. સાપ = પાછળ, સીડી = આગળ.'
           : 'ખાનાં પર શૈક્ષણિક કાર્ડ અને વિચારના પ્રશ્નો દેખાશે.';
       });
     });
@@ -79,7 +79,7 @@ export class UI {
     this.placeTokens();
     document.getElementById('current-mode-label').textContent =
       this.selectedMode === 'classic' ? 'ક્લાસિક મોડ' : 'વિચારશીલ મોડ';
-    this.setMoveMessage('પાસો નાખો. સાપ ↓ પાછળ, સીડી ↑ આગળ.');
+    this.setMoveMessage('બે પાસા નાખો. સાપ ↓ પાછળ, સીડી ↑ આગળ.');
     this.showScreen('game');
   }
 
@@ -143,17 +143,17 @@ export class UI {
     this.connections.ladders.forEach((l, i) => {
       const a = this.squareCenter(l.from), b = this.squareCenter(l.to);
       if (!a || !b) return;
-      const midX = (a.x + b.x) / 2 + (i % 2 === 0 ? 1.5 : -1.5);
+      const midX = (a.x + b.x) / 2 + (i % 2 === 0 ? 1.8 : -1.8);
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttribute('class', 'ladder-path');
       path.setAttribute('d', `M ${a.x} ${a.y} Q ${midX} ${(a.y + b.y) / 2} ${b.x} ${b.y}`);
       svg.appendChild(path);
-      for (let t = 0.25; t < 1; t += 0.25) {
+      for (let t = 0.22; t < 1; t += 0.22) {
         const x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t;
         const rung = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         rung.setAttribute('class', 'ladder-rung');
-        rung.setAttribute('x1', x - 1.2); rung.setAttribute('y1', y);
-        rung.setAttribute('x2', x + 1.2); rung.setAttribute('y2', y);
+        rung.setAttribute('x1', x - 1.3); rung.setAttribute('y1', y);
+        rung.setAttribute('x2', x + 1.3); rung.setAttribute('y2', y);
         svg.appendChild(rung);
       }
     });
@@ -161,15 +161,15 @@ export class UI {
       const a = this.squareCenter(s.from), b = this.squareCenter(s.to);
       if (!a || !b) return;
       const dx = b.x - a.x, dy = b.y - a.y;
-      const cx1 = a.x + dx * 0.3 + (i % 2 === 0 ? 4 : -4), cy1 = a.y + dy * 0.3;
-      const cx2 = a.x + dx * 0.7 + (i % 2 === 0 ? -3 : 3), cy2 = a.y + dy * 0.7;
+      const cx1 = a.x + dx * 0.28 + (i % 2 === 0 ? 5 : -5), cy1 = a.y + dy * 0.28;
+      const cx2 = a.x + dx * 0.72 + (i % 2 === 0 ? -4 : 4), cy2 = a.y + dy * 0.72;
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttribute('class', 'snake-path');
       path.setAttribute('d', `M ${a.x} ${a.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${b.x} ${b.y}`);
       svg.appendChild(path);
       const head = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       head.setAttribute('class', 'snake-head-dot');
-      head.setAttribute('cx', a.x); head.setAttribute('cy', a.y); head.setAttribute('r', 1.4);
+      head.setAttribute('cx', a.x); head.setAttribute('cy', a.y); head.setAttribute('r', 1.5);
       svg.appendChild(head);
     });
     wrapper.appendChild(svg);
@@ -230,7 +230,7 @@ export class UI {
     document.getElementById('current-player-pos').textContent = `સ્થાન: ${toGujaratiNum(p.position)}`;
     document.getElementById('btn-dice').disabled = !this.engine.canRoll() || this.rolling;
     const tip = document.getElementById('help-tip');
-    if (tip) tip.textContent = this.engine.canRoll() ? `${p.name}, પાસો નાખો` : 'રાહ જુઓ…';
+    if (tip) tip.textContent = this.engine.canRoll() ? `${p.name}, પાસા નાખો` : 'રાહ જુઓ…';
   }
 
   updatePlayersList() {
@@ -263,15 +263,39 @@ export class UI {
   async onDiceClick() {
     if (!this.engine.canRoll() || this.rolling) return;
     this.rolling = true;
-    const diceEl = document.getElementById('dice-display');
+    const d1El = document.getElementById('dice-d1');
+    const d2El = document.getElementById('dice-d2');
+    const totalEl = document.getElementById('dice-total');
+    const legacy = document.getElementById('dice-display');
+    const faces = [d1El, d2El].filter(Boolean);
+    if (legacy && !d1El) faces.push(legacy);
     document.getElementById('btn-dice').disabled = true;
-    diceEl.classList.add('dice-rolling');
-    this.setMoveMessage('પાસો ફરી રહ્યો છે…');
-    for (let i = 0; i < 7; i++) { diceEl.textContent = toGujaratiNum(Math.floor(Math.random() * 6) + 1); await sleep(70); }
-    const value = this.engine.rollDice();
-    diceEl.classList.remove('dice-rolling');
-    diceEl.textContent = toGujaratiNum(value);
-    diceEl.classList.remove('pop'); void diceEl.offsetWidth; diceEl.classList.add('pop');
+    faces.forEach(el => el.classList.add('dice-rolling'));
+    this.setMoveMessage('બે પાસા ફરી રહ્યા છે…');
+
+    for (let i = 0; i < 8; i++) {
+      faces.forEach(el => { el.textContent = toGujaratiNum(Math.floor(Math.random() * 6) + 1); });
+      await sleep(65);
+    }
+
+    const rolled = this.engine.rollDice();
+    const d1 = (rolled && typeof rolled === 'object') ? rolled.d1 : rolled;
+    const d2 = (rolled && typeof rolled === 'object') ? rolled.d2 : 0;
+    const value = (rolled && typeof rolled === 'object') ? rolled.total : rolled;
+
+    faces.forEach(el => el.classList.remove('dice-rolling'));
+    if (d1El && d2El) {
+      d1El.textContent = toGujaratiNum(d1);
+      d2El.textContent = toGujaratiNum(d2);
+      d1El.classList.remove('pop'); d2El.classList.remove('pop');
+      void d1El.offsetWidth;
+      d1El.classList.add('pop'); d2El.classList.add('pop');
+      if (totalEl) totalEl.textContent = '=' + toGujaratiNum(value);
+    } else if (legacy) {
+      legacy.textContent = toGujaratiNum(value);
+      legacy.classList.remove('pop'); void legacy.offsetWidth; legacy.classList.add('pop');
+    }
+
     await sleep(280);
     const movedPlayer = this.engine.currentPlayer;
     const fromPos = movedPlayer.position;
@@ -279,8 +303,11 @@ export class UI {
     this.engine.players.forEach(p => this.moveTokenElement(p, p.id === movedPlayer.id));
     this.highlightActiveToken();
     this.updatePlayersList();
+
+    const diceLabel = d2 ? `${toGujaratiNum(d1)}+${toGujaratiNum(d2)}=${toGujaratiNum(value)}` : toGujaratiNum(value);
+
     if (result?.blocked) {
-      this.setMoveMessage(`પાસો ${toGujaratiNum(value)} — ચોક્કસ પાસો જરૂરી.`);
+      this.setMoveMessage(`પાસા ${diceLabel} — ચોક્કસ પાસો જરૂરી.`);
       this.highlightSquare(null);
     } else if (result?.connection) {
       const c = result.connection;
@@ -295,9 +322,10 @@ export class UI {
       this.setMoveMessage('વિજય!');
     } else {
       const landed = result?.finalPos ?? (fromPos + value);
-      this.setMoveMessage(`પાસો ${toGujaratiNum(value)} → ${toGujaratiNum(landed)}`);
+      this.setMoveMessage(`પાસા ${diceLabel} → ${toGujaratiNum(landed)}`);
       this.highlightSquare(landed);
     }
+
     if (result?.won) { await sleep(400); this.showWin(this.engine.winner); }
     else if (result?.needsCard) { await sleep(350); this.showRandomCard(result.landedOn); }
     else { this.rolling = false; this.updateTurnPanel(); setTimeout(() => this.highlightSquare(null), 1200); }
