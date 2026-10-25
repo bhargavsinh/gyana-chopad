@@ -1,2 +1,32 @@
 <!DOCTYPE html>
-<html lang="gu"><head><meta charset="UTF-8"/><title>ડેટા</title><style>body{font-family:system-ui;background:#F8F1E3;padding:1.5rem;max-width:40rem;margin:auto}a{color:#C45C26}</style></head><body><p><a href="index.html">← Policy Center</a></p><h1>ડેટા હેન્ડલિંગ</h1><p>બધી લોજિક બ્રાઉઝરમાં. કોઈ personal data સર્વર પર મોકલાતો નથી.</p></body></html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ડેટા હેન્ડલિંગ | Gyāna Chopad V1.4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:#F8F1E3;color:#2C1810;margin:0;line-height:1.75}header{background:#6B2D3C;color:#F8F1E3;padding:1rem;display:flex;gap:1rem}header a{color:#F8F1E3;text-decoration:none}main{max-width:44rem;margin:0 auto;padding:1.75rem 1.25rem}h1{color:#6B2D3C}h2{color:#6B2D3C;margin-top:1.5rem;border-bottom:1px solid #B8860B44;padding-bottom:.3rem}.card{background:#fffdf8;border:1px solid #B8860B55;border-radius:.85rem;padding:1rem;margin:1rem 0}ul{padding-left:1.35rem}a{color:#C45C26}</style>
+</head>
+<body>
+<header><a href="../index.html">← રમત</a><a href="index.html">Policy Center</a></header>
+<main>
+  <h1>ડેટા હેન્ડલિંગ</h1>
+  <p class="card">રમતમાં ડેટા કેવી રીતે વહે છે — સર્વર વિના.</p>
+  <h2>૧. ડેટા પ્રવાહ</h2>
+  <p>રમતનો તમામ તર્ક બ્રાઉઝરમાં ચાલે છે. JSON ફાઇલો static assets છે. ખેલાડી નામો પાછા સર્વર પર મોકલાતા નથી.</p>
+  <pre class="card" style="white-space:pre-wrap;font-size:.85rem">[તમારું ઉપકરણ] → HTML/JS/JSON લોડ (GitHub Pages)
+                → રમત મેમરીમાં ચાલે
+                → કોઈ game-state upload નથી</pre>
+  <h2>૨. પ્રક્રિયા કરાતો ડેટા</h2>
+  <ul>
+    <li>ખેલાડી નામો (session, sanitized)</li>
+    <li>પાસા અને સ્થાન (session)</li>
+    <li>મોડ અને exact-win વિકલ્પ (session)</li>
+  </ul>
+  <h2>૩. સંગ્રહ સમયગાળો</h2>
+  <p>મૂળભૂત રીતે: ટૅબ/વિન્ડો બંધ થતાં સત્ર સમાપ્ત. કોઈ સર્વર-સાઇડ retention નથી.</p>
+  <h2>૪. શેરિંગ</h2>
+  <p>રમત તમારો game state તૃતીય પક્ષો સાથે શેર કરતી નથી. <a href="privacy.html">ગોપનીયતા</a> જુઓ.</p>
+</main>
+</body>
+</html>
