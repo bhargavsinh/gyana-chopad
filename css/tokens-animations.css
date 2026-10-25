@@ -1,4 +1,4 @@
-/* Tokens, dual dice, micro-animations */
+/* Tokens, dual dice, micro-animations + V1.5.1 button */
 
 .token {
   position: absolute;
@@ -52,7 +52,7 @@
   height: 2.75rem;
   border-radius: 0.5rem;
   border: 2px solid var(--maroon);
-  background: var(--ivory);
+  background: #FFFDF8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,9 +66,9 @@
 .dice-face.pop { animation: dicePop 0.35s ease; }
 
 .dice-total {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--saffron);
+  color: #B8431A;
   min-width: 2rem;
   text-align: center;
 }
@@ -97,4 +97,27 @@
 @keyframes celebrate {
   from { transform: scale(1) rotate(-8deg); }
   to { transform: scale(1.15) rotate(8deg); }
+}
+
+/* Dice button — high-contrast orange */
+#btn-dice {
+  background: linear-gradient(180deg, #E06A2E 0%, #B8431A 100%) !important;
+  color: #fff !important;
+  border: 2px solid #8B2E12 !important;
+  box-shadow: 0 3px 0 #8B2E12, 0 4px 12px rgba(180, 60, 20, 0.35);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  min-height: 3rem;
+}
+#btn-dice:hover:not(:disabled) {
+  background: linear-gradient(180deg, #F07838 0%, #C45020 100%) !important;
+}
+#btn-dice:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #8B2E12;
+}
+#btn-dice:disabled {
+  background: linear-gradient(180deg, #C4A090 0%, #A08070 100%) !important;
+  border-color: #806050 !important;
+  box-shadow: none;
+  opacity: 0.8;
 }
