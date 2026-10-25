@@ -1,5 +1,5 @@
 /**
- * Gyāna Chopad V1.5 — UI (dual dice + traditional board styles)
+ * Gyāna Chopad V1.5 — UI (dual dice + visible button fix)
  */
 
 import { buildPositionMap, getStageForSquare } from './data.js';
@@ -69,7 +69,8 @@ export class UI {
   startGame() {
     const inputs = document.querySelectorAll('.player-name-input');
     const names = Array.from(inputs).map((inp, i) => sanitizePlayerName(inp.value.trim() || inp.placeholder, `ખેલાડી ${i + 1}`));
-    const exactWin = document.getElementById('exact-win').checked;
+    const exactWin = document.getElementById('exact-win')?.checked ?? true;
+    this.rolling = false;
     this.engine.setup(names, this.selectedMode, exactWin);
     this.renderBoard();
     this.drawConnections();
@@ -77,10 +78,16 @@ export class UI {
     this.updateTurnPanel();
     this.updatePlayersList();
     this.placeTokens();
-    document.getElementById('current-mode-label').textContent =
-      this.selectedMode === 'classic' ? 'ક્લાસિક મોડ' : 'વિચારશીલ મોડ';
+    const modeLabel = document.getElementById('current-mode-label');
+    if (modeLabel) modeLabel.textContent = this.selectedMode === 'classic' ? 'ક્લાસિક મોડ' : 'વિચારશીલ મોડ';
     this.setMoveMessage('બે પાસા નાખો. સાપ ↓ પાછળ, સીડી ↑ આગળ.');
     this.showScreen('game');
+    const diceBtn = document.getElementById('btn-dice');
+    if (diceBtn) {
+      diceBtn.disabled = false;
+      diceBtn.style.opacity = '1';
+      diceBtn.style.pointerEvents = 'auto';
+    }
   }
 
   showScreen(name) {
@@ -177,6 +184,7 @@ export class UI {
 
   renderStageLegend() {
     const el = document.getElementById('stage-legend');
+    if (!el) return;
     el.innerHTML = this.board.stages.map(s =>
       `<span class="px-1.5 py-0.5 rounded" style="background:${s.color}22;color:${s.color}">${s.nameGu}</span>`
     ).join('') + `<span class="conn-legend ladder">↑ સીડી</span><span class="conn-legend snake">↓ સાપ</span>`;
@@ -226,11 +234,19 @@ export class UI {
   updateTurnPanel() {
     const p = this.engine.currentPlayer;
     if (!p) return;
-    document.getElementById('current-player-name').textContent = p.name;
-    document.getElementById('current-player-pos').textContent = `સ્થાન: ${toGujaratiNum(p.position)}`;
-    document.getElementById('btn-dice').disabled = !this.engine.canRoll() || this.rolling;
+    const nameEl = document.getElementById('current-player-name');
+    const posEl = document.getElementById('current-player-pos');
+    if (nameEl) nameEl.textContent = p.name;
+    if (posEl) posEl.textContent = `સ્થાન: ${toGujaratiNum(p.position)}`;
+    const btn = document.getElementById('btn-dice');
+    const allow = this.engine.canRoll() && !this.rolling;
+    if (btn) {
+      btn.disabled = !allow;
+      btn.style.opacity = allow ? '1' : '0.8';
+      btn.style.pointerEvents = allow ? 'auto' : 'none';
+    }
     const tip = document.getElementById('help-tip');
-    if (tip) tip.textContent = this.engine.canRoll() ? `${p.name}, પાસા નાખો` : 'રાહ જુઓ…';
+    if (tip) tip.textContent = allow ? `${p.name}, પાસા નાખો` : 'રાહ જુઓ…';
   }
 
   updatePlayersList() {
@@ -244,6 +260,7 @@ export class UI {
 
   setMoveMessage(text) {
     const el = document.getElementById('move-message');
+    if (!el) return;
     el.textContent = text;
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
   }
@@ -266,69 +283,78 @@ export class UI {
     const d1El = document.getElementById('dice-d1');
     const d2El = document.getElementById('dice-d2');
     const totalEl = document.getElementById('dice-total');
-    const legacy = document.getElementById('dice-display');
     const faces = [d1El, d2El].filter(Boolean);
-    if (legacy && !d1El) faces.push(legacy);
-    document.getElementById('btn-dice').disabled = true;
+    const btn = document.getElementById('btn-dice');
+    if (btn) btn.disabled = true;
     faces.forEach(el => el.classList.add('dice-rolling'));
     this.setMoveMessage('બે પાસા ફરી રહ્યા છે…');
 
-    for (let i = 0; i < 8; i++) {
-      faces.forEach(el => { el.textContent = toGujaratiNum(Math.floor(Math.random() * 6) + 1); });
-      await sleep(65);
-    }
-
-    const rolled = this.engine.rollDice();
-    const d1 = (rolled && typeof rolled === 'object') ? rolled.d1 : rolled;
-    const d2 = (rolled && typeof rolled === 'object') ? rolled.d2 : 0;
-    const value = (rolled && typeof rolled === 'object') ? rolled.total : rolled;
-
-    faces.forEach(el => el.classList.remove('dice-rolling'));
-    if (d1El && d2El) {
-      d1El.textContent = toGujaratiNum(d1);
-      d2El.textContent = toGujaratiNum(d2);
-      d1El.classList.remove('pop'); d2El.classList.remove('pop');
-      void d1El.offsetWidth;
-      d1El.classList.add('pop'); d2El.classList.add('pop');
-      if (totalEl) totalEl.textContent = '=' + toGujaratiNum(value);
-    } else if (legacy) {
-      legacy.textContent = toGujaratiNum(value);
-      legacy.classList.remove('pop'); void legacy.offsetWidth; legacy.classList.add('pop');
-    }
-
-    await sleep(280);
-    const movedPlayer = this.engine.currentPlayer;
-    const fromPos = movedPlayer.position;
-    const result = this.engine.applyMove(value);
-    this.engine.players.forEach(p => this.moveTokenElement(p, p.id === movedPlayer.id));
-    this.highlightActiveToken();
-    this.updatePlayersList();
-
-    const diceLabel = d2 ? `${toGujaratiNum(d1)}+${toGujaratiNum(d2)}=${toGujaratiNum(value)}` : toGujaratiNum(value);
-
-    if (result?.blocked) {
-      this.setMoveMessage(`પાસા ${diceLabel} — ચોક્કસ પાસો જરૂરી.`);
-      this.highlightSquare(null);
-    } else if (result?.connection) {
-      const c = result.connection;
-      if (c.type === 'ladder') {
-        this.setMoveMessage(`સીડી! ${c.virtueGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`);
-        this.highlightSquare(c.to);
-      } else {
-        this.setMoveMessage(`સાપ! ${c.viceGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`);
-        this.highlightSquare(c.to);
+    try {
+      for (let i = 0; i < 8; i++) {
+        faces.forEach(el => { el.textContent = toGujaratiNum(Math.floor(Math.random() * 6) + 1); });
+        await sleep(65);
       }
-    } else if (result?.won) {
-      this.setMoveMessage('વિજય!');
-    } else {
-      const landed = result?.finalPos ?? (fromPos + value);
-      this.setMoveMessage(`પાસા ${diceLabel} → ${toGujaratiNum(landed)}`);
-      this.highlightSquare(landed);
-    }
 
-    if (result?.won) { await sleep(400); this.showWin(this.engine.winner); }
-    else if (result?.needsCard) { await sleep(350); this.showRandomCard(result.landedOn); }
-    else { this.rolling = false; this.updateTurnPanel(); setTimeout(() => this.highlightSquare(null), 1200); }
+      const rolled = this.engine.rollDice();
+      if (!rolled) {
+        this.rolling = false;
+        this.updateTurnPanel();
+        this.setMoveMessage('પાસા ફરી શકાયા નહીં — ફરી પ્રયાસ કરો.');
+        return;
+      }
+      const d1 = (typeof rolled === 'object') ? rolled.d1 : rolled;
+      const d2 = (typeof rolled === 'object') ? rolled.d2 : 0;
+      const value = (typeof rolled === 'object') ? rolled.total : rolled;
+
+      faces.forEach(el => el.classList.remove('dice-rolling'));
+      if (d1El && d2El) {
+        d1El.textContent = toGujaratiNum(d1);
+        d2El.textContent = toGujaratiNum(d2);
+        d1El.classList.add('pop');
+        d2El.classList.add('pop');
+        if (totalEl) totalEl.textContent = '=' + toGujaratiNum(value);
+      }
+
+      await sleep(280);
+      const movedPlayer = this.engine.currentPlayer;
+      const fromPos = movedPlayer.position;
+      const result = this.engine.applyMove(Number(value));
+      this.engine.players.forEach(p => this.moveTokenElement(p, p.id === movedPlayer.id));
+      this.highlightActiveToken();
+      this.updatePlayersList();
+
+      const diceLabel = d2 ? `${toGujaratiNum(d1)}+${toGujaratiNum(d2)}=${toGujaratiNum(value)}` : toGujaratiNum(value);
+
+      if (result?.blocked) {
+        this.setMoveMessage(`પાસા ${diceLabel} — ચોક્કસ પાસો જરૂરી.`);
+        this.highlightSquare(null);
+      } else if (result?.connection) {
+        const c = result.connection;
+        if (c.type === 'ladder') {
+          this.setMoveMessage(`સીડી! ${c.virtueGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`);
+          this.highlightSquare(c.to);
+        } else {
+          this.setMoveMessage(`સાપ! ${c.viceGu} — ${toGujaratiNum(c.from)} થી ${toGujaratiNum(c.to)}`);
+          this.highlightSquare(c.to);
+        }
+      } else if (result?.won) {
+        this.setMoveMessage('વિજય!');
+      } else {
+        const landed = result?.finalPos ?? (fromPos + Number(value));
+        this.setMoveMessage(`પાસા ${diceLabel} → ${toGujaratiNum(landed)}`);
+        this.highlightSquare(landed);
+      }
+
+      if (result?.won) { await sleep(400); this.showWin(this.engine.winner); }
+      else if (result?.needsCard) { await sleep(350); this.showRandomCard(result.landedOn); }
+      else { this.rolling = false; this.updateTurnPanel(); setTimeout(() => this.highlightSquare(null), 1200); }
+    } catch (err) {
+      console.error(err);
+      this.rolling = false;
+      this.engine.phase = 'waiting';
+      this.updateTurnPanel();
+      this.setMoveMessage('ભૂલ — ફરી પાસા નાખો.');
+    }
   }
 
   showRandomCard(landedOn) {
