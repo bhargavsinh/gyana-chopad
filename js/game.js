@@ -1,5 +1,7 @@
+import { rollTwoDice, isValidDiceResult } from './dice.js';
+
 /**
- * Gyāna Chopad — Core game engine
+ * Gyāna Chopad V1.5 — Core game engine (2 dice)
  * State, turns, movement, snakes/ladders, win detection.
  */
 
@@ -15,7 +17,7 @@ export class GameEngine {
     this.winSquare = board.winSquare || 72;
     this.players = [];
     this.currentIndex = 0;
-    this.phase = 'waiting'; // waiting | rolling | moving | card | finished
+    this.phase = 'waiting';
     this.lastDice = null;
     this.mode = 'classic';
     this.winner = null;
@@ -55,18 +57,16 @@ export class GameEngine {
     return this.phase === 'waiting' && !this.winner;
   }
 
+  /** Roll two dice. Returns { d1, d2, total } or null. */
   rollDice() {
     if (!this.canRoll()) return null;
     this.phase = 'rolling';
-    const value = Math.floor(Math.random() * 6) + 1;
-    this.lastDice = value;
-    this.emit('dice', { value, player: this.currentPlayer });
-    return value;
+    const result = rollTwoDice();
+    this.lastDice = result;
+    this.emit('dice', { ...result, value: result.total, player: this.currentPlayer });
+    return result;
   }
 
-  /**
-   * Apply movement after dice. Returns result object.
-   */
   applyMove(diceValue) {
     if (this.phase !== 'rolling' && this.phase !== 'waiting') return null;
     this.phase = 'moving';
@@ -74,15 +74,10 @@ export class GameEngine {
     const from = player.position;
     let to = from + diceValue;
 
-    // Exact win rule
     if (to > this.winSquare) {
       if (this.exactWin) {
         this.emit('move', {
-          player,
-          from,
-          to: from,
-          dice: diceValue,
-          blocked: true,
+          player, from, to: from, dice: diceValue, blocked: true,
           message: 'ચોક્કસ પાસો જરૂરી — આગળ નહીં વધ્યા'
         });
         this.phase = 'waiting';
@@ -93,7 +88,6 @@ export class GameEngine {
     }
 
     player.position = to;
-
     let connection = null;
     let finalPos = to;
 
@@ -113,28 +107,13 @@ export class GameEngine {
       player.position = this.winSquare;
       this.winner = player;
       this.phase = 'finished';
-      this.emit('move', {
-        player,
-        from,
-        to: finalPos,
-        dice: diceValue,
-        connection,
-        won: true
-      });
+      this.emit('move', { player, from, to: finalPos, dice: diceValue, connection, won: true });
       this.emit('win', { player });
       return { won: true, connection };
     }
 
-    this.emit('move', {
-      player,
-      from,
-      to: finalPos,
-      dice: diceValue,
-      connection,
-      landedOn: to
-    });
+    this.emit('move', { player, from, to: finalPos, dice: diceValue, connection, landedOn: to });
 
-    // Reflection mode may pause for card
     if (this.mode === 'reflection') {
       this.phase = 'card';
       return { needsCard: true, landedOn: to, connection, finalPos };
@@ -171,10 +150,7 @@ export class GameEngine {
   }
 
   restart() {
-    this.players.forEach(p => {
-      p.position = 0;
-      p.finished = false;
-    });
+    this.players.forEach(p => { p.position = 0; p.finished = false; });
     this.currentIndex = 0;
     this.phase = 'waiting';
     this.lastDice = null;
