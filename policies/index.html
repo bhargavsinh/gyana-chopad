@@ -3,64 +3,83 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Gyāna Chopad નીતિઓ, અસ્વીકૃતિઓ અને માર્ગદર્શિકાઓનું કેન્દ્ર."/>
+  <meta name="robots" content="index,follow"/>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"/>
-  <meta name="description" content="Gyāna Chopad નીતિ કેન્દ્ર — ગોપનીયતા, સુરક્ષા, શૈક્ષણિક અસ્વીકૃતિ અને અન્ય નીતિઓ."/>
-  <title>નીતિ કેન્દ્ર | Policy Center — Gyāna Chopad V1.4</title>
+  <meta name="referrer" content="no-referrer"/>
+  <title>નીતિ કેન્દ્ર | Gyāna Chopad V1.4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-  body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:#F8F1E3;color:#2C1810;margin:0;line-height:1.75}
-  header{background:#6B2D3C;color:#F8F1E3;padding:0.9rem 1.25rem}
-  header a{color:#F8F1E3;text-decoration:none;margin-right:1rem;font-size:0.9rem}
-  main{max-width:44rem;margin:0 auto;padding:1.75rem 1.25rem 3rem}
-  h1{color:#6B2D3C;font-size:1.65rem}
-  h2{color:#8B4513;font-size:1.15rem;margin-top:1.75rem;border-bottom:1px solid rgba(184,134,11,0.25);padding-bottom:0.25rem}
-  .card{background:rgba(255,255,255,0.65);border:1px solid rgba(184,134,11,0.35);border-radius:0.75rem;padding:1rem 1.15rem;margin:1.25rem 0}
-  .badge{display:inline-block;background:rgba(107,45,60,0.1);color:#6B2D3C;font-size:0.75rem;padding:0.2rem 0.55rem;border-radius:999px}
-  a{color:#C45C26}
-  ul{padding-left:1.35rem}
-  footer{text-align:center;padding:2rem;font-size:0.8rem;opacity:0.75}
-  .grid a{display:block;padding:0.65rem 0.85rem;margin:0.35rem 0;background:#fff8;border:1px solid #B8860B44;border-radius:0.5rem;text-decoration:none;color:#2C1810}
-  .grid a:hover{border-color:#C45C26}
-  .grid a strong{color:#6B2D3C}
+:root{--maroon:#6B2D3C;--saffron:#C45C26;--ivory:#F8F1E3;--ink:#2C1810;--gold:#B8860B;--green:#1F4D3A}
+*{box-sizing:border-box}
+body{font-family:'Noto Sans Gujarati',system-ui,sans-serif;background:var(--ivory);color:var(--ink);margin:0;line-height:1.75;font-size:1rem}
+header{background:var(--maroon);color:var(--ivory);padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;align-items:center}
+header a{color:var(--ivory);text-decoration:none;font-size:.9rem}
+header a:hover{text-decoration:underline}
+main{max-width:44rem;margin:0 auto;padding:1.75rem 1.25rem 3rem}
+h1{color:var(--maroon);font-size:1.65rem;margin:0 0 .35rem}
+.sub{color:var(--saffron);font-size:.95rem;margin:0 0 1.25rem;font-style:italic}
+h2{color:var(--maroon);font-size:1.15rem;margin:1.75rem 0 .6rem;border-bottom:1px solid #B8860B44;padding-bottom:.35rem}
+p,li{font-size:.95rem}
+ul{padding-left:1.35rem}
+li{margin:.35rem 0}
+.card{background:#fffdf8;border:1px solid #B8860B55;border-radius:.85rem;padding:1rem 1.15rem;margin:1rem 0}
+.note{background:#6B2D3C10;border-left:4px solid var(--maroon);padding:.75rem 1rem;margin:1rem 0;border-radius:0 .5rem .5rem 0}
+.muted{opacity:.8;font-size:.88rem}
+a{color:var(--saffron)}
+footer{text-align:center;padding:2rem 1rem;font-size:.8rem;opacity:.75;border-top:1px solid #B8860B33;margin-top:2rem}
+.toc a{display:block;padding:.35rem 0;text-decoration:none;color:var(--maroon)}
+.toc a:hover{color:var(--saffron)}
   </style>
 </head>
 <body>
-<header><a href="../index.html">← રમત</a><a href="index.html">Policy Center</a></header>
-<main>
-<span class="badge">V1.4 · વિગતવાર નીતિઓ</span>
-<h1>નીતિ કેન્દ્ર</h1>
-<p style="color:#C45C26;font-style:italic">Policy Center</p>
-<div class="card">
-<p>Gyāna Chopad ની બધી નીતિઓ અને માર્ગદર્શિકાઓનું કેન્દ્ર. રમત <strong>સંપૂર્ણપણે બ્રાઉઝરમાં</strong> ચાલે છે — કોઈ એકાઉન્ટ, ચુકવણી, અથવા સર્વર પર વ્યક્તિગત પ્રોફાઇલ નથી.</p>
+  <header>
+    <a href="../index.html">← રમત</a>
+    <a href="index.html">Policy Center</a>
+    <a href="privacy.html">ગોપનીયતા</a>
+    <a href="security.html">સુરક્ષા</a>
+    <a href="terms.html">શરતો</a>
+  </header>
+  <main>
+    <h1>નીતિ કેન્દ્ર</h1>
+    <p class="sub">Policy Center · Gyāna Chopad V1.4</p>
+    <div class="card"><p>Gyāna Chopad નીતિઓ, અસ્વીકૃતિઓ અને માર્ગદર્શિકાઓનું કેન્દ્ર.</p></div>
+
+<p>આ કેન્દ્ર Gyāna Chopad (જ્ઞાન ચોપડ) સંબંધિત નીતિઓ, અસ્વીકૃતિઓ અને માર્ગદર્શિકાઓ એક જગ્યાએ રાખે છે. રમત <strong>સંપૂર્ણપણે સ્થાનિક (client-side)</strong> ચાલે છે — કોઈ એકાઉન્ટ, લૉગિન અથવા સર્વર-સાઇડ ડેટાબેઝ નથી.</p>
+
+<div class="note">
+  <strong>ઝડપી સારાંશ:</strong> અમે વ્યક્તિગત માહિતી એકત્રિત કરતા નથી; સામગ્રી શૈક્ષણિક છે; કર્મ/ધર્મને સ્કોરમાં ઘટાડવામાં આવ્યા નથી; અને “સુરક્ષા” અહીં વાસ્તવિક static-site નિયંત્રણો છે, માર્કેટિંગ શબ્દો નહીં.
 </div>
 
 <h2>નીતિઓની યાદી</h2>
-<div class="grid">
-<a href="privacy.html"><strong>ગોપનીયતા નીતિ</strong> — શું એકત્રિત થતું નથી, બ્રાઉઝરમાં શું રહે</a>
-<a href="terms.html"><strong>ઉપયોગની શરતો</strong> — મંજૂર/અમંજૂર ઉપયોગ, જવાબદારી</a>
-<a href="security.html"><strong>સુરક્ષા નીતિ</strong> — CSP, સેનિટાઇઝ, વાસ્તવિક નિયંત્રણો</a>
-<a href="educational-disclaimer.html"><strong>શૈક્ષણિક અસ્વીકૃતિ</strong> — ઐતિહાસિક/ધાર્મિક દાવાઓની મર્યાદા</a>
-<a href="content-policy.html"><strong>સામગ્રી નીતિ</strong> — કાર્ડ્સ અને ટેક્સ્ટના સિદ્ધાંતો</a>
-<a href="philosophical-integrity.html"><strong>દાર્શનિક અખંડિતતા</strong> — કૃપાને સ્કોર ન બનાવવું</a>
-<a href="accessibility.html"><strong>સુલભતા</strong> — પ્રયત્નો અને મર્યાદાઓ</a>
-<a href="cookies.html"><strong>કુકીઝ અને સ્ટોરેજ</strong> — ટ્રેકિંગ કુકીઝ નથી</a>
-<a href="data-handling.html"><strong>ડેટા હેન્ડલિંગ</strong> — ડેટા પ્રવાહ</a>
-<a href="community.html"><strong>સમુદાય માર્ગદર્શિકા</strong> — આદરપૂર્ણ ચર્ચા</a>
-<a href="family-friendly.html"><strong>પારિવારિક ઉપયોગ</strong> — બાળકો સાથે માર્ગદર્શન</a>
-<a href="open-source.html"><strong>ઓપન સોર્સ</strong> — લાઇસન્સ અને યોગદાન</a>
-</div>
+<nav class="toc card">
+  <a href="privacy.html">૧. ગોપનીયતા નીતિ (Privacy Policy)</a>
+  <a href="terms.html">૨. ઉપયોગની શરતો (Terms of Use)</a>
+  <a href="security.html">૩. સુરક્ષા નીતિ (Security Policy)</a>
+  <a href="educational-disclaimer.html">૪. શૈક્ષણિક અસ્વીકૃતિ (Educational Disclaimer)</a>
+  <a href="content-policy.html">૫. સામગ્રી નીતિ (Content Policy)</a>
+  <a href="philosophical-integrity.html">૬. દાર્શનિક અખંડિતતા (Philosophical Integrity)</a>
+  <a href="accessibility.html">૭. સુલભતા (Accessibility)</a>
+  <a href="cookies.html">૮. કુકીઝ અને સ્ટોરેજ (Cookies &amp; Storage)</a>
+  <a href="data-handling.html">૯. ડેટા હેન્ડલિંગ (Data Handling)</a>
+  <a href="community.html">૧૦. સમુદાય માર્ગદર્શિકા (Community Guidelines)</a>
+  <a href="family-friendly.html">૧૧. પારિવારિક ઉપયોગ (Family-Friendly Use)</a>
+  <a href="open-source.html">૧૨. ઓપન સોર્સ નોટિસ (Open Source Notice)</a>
+</nav>
 
-<h2>સંક્ષિપ્ત સાર</h2>
+<h2>આ નીતિઓ કોને લાગુ પડે છે?</h2>
 <ul>
-<li><strong>કોઈ લૉગિન નથી</strong> — નામ માત્ર સત્ર મેમરીમાં.</li>
-<li><strong>કોઈ જાહેરાત SDK નથી</strong> — રમત કોડમાં.</li>
-<li><strong>શૈક્ષણિક રૂપાંતર</strong> — કોઈ એક ઐતિહાસિક બોર્ડની નકલ નથી.</li>
-<li><strong>દાર્શનિક સાવધાની</strong> — મોક્ષ/કૃપાને પોઈન્ટ સિસ્ટમ નહીં.</li>
+  <li>રમત રમનારા તમામ ખેલાડીઓ</li>
+  <li>Policy Center વાંચનારા મુલાકાતીઓ</li>
+  <li>કોડ કે સામગ્રીનો ઉપયોગ કરનારા યોગદાનકર્તાઓ</li>
 </ul>
 
-<h2>સંપર્ક</h2>
-<p>પ્રશ્નો કે સુધારા માટે GitHub Issues વાપરો. આ પૃષ્ઠો માહિતી માટે છે; કાનૂની સલાહ નથી.</p>
-</main>
-<footer>Gyāna Chopad V1.4 · શૈક્ષણિક સ્થિર રમત</footer>
+<p class="muted">છેલ્લું અપડેટ: V1.4 · આ પૃષ્ઠો માહિતી માટે છે; કાનૂની સલાહ નથી.</p>
+  </main>
+  <footer>
+    Gyāna Chopad V1.4 · Educational static game · Not legal advice<br/>
+    <a href="index.html">નીતિ કેન્દ્ર</a> · <a href="../index.html">રમત પર પાછા</a>
+  </footer>
 </body>
 </html>
